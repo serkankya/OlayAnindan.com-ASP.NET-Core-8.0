@@ -27,8 +27,6 @@ namespace OA.EntityLayer.Concrete
         [Column("AltText")]
         public string? AltText { get; set; }
 
-        [Column("FileSize")]
-        public int FileSize { get; set; }
 
         [Column("UploadedAt")]
         public DateTime UploadedAt { get; set; }
