@@ -1,4 +1,4 @@
-@OA.WebAPI_HostAddress = http://localhost:5098
+@OA.WebAPI_HostAddress = http://localhost:5104
 
 GET {{OA.WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OA.BusinessLayer\OA.BusinessLayer.csproj" />
+    <ProjectReference Include="..\OA.EntityLayer\OA.EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>

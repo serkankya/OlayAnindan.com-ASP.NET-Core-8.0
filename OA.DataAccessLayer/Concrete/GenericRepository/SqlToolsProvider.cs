@@ -6,10 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OA.BusinessLayer.Abstract.GenericRepository;
 
 namespace OA.DataAccessLayer.Concrete.GenericRepository
 {
-	public class SqlToolsProvider
+	public class SqlToolsProvider : ISqlToolsProvider
 	{
 		public Dictionary<string, string> GetColumnAndPropertyNames<T>(bool key = true)
 		{
