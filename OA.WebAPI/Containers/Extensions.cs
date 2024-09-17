@@ -17,6 +17,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<ISqlToolsProvider, SqlToolsProvider>();
 
 			services.AddTransient<IGenericRepository<Role, InsertRoleRequest, UpdateRoleRequest>, GenericRepository<Role,InsertRoleRequest, UpdateRoleRequest>>();
+			services.AddTransient<IRoleDal, RoleDal>();
 		}
 	}
 }

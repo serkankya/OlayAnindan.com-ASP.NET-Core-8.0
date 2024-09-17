@@ -13,7 +13,6 @@ namespace OA.WebAPI.Controllers
 	{
         public RoleController(IGenericRepository<Role, InsertRoleRequest, UpdateRoleRequest> repository) : base(repository) 
         {
-            
         }
     }
 }

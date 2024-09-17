@@ -4,13 +4,13 @@ using OA.BusinessLayer.Abstract.Dapper;
 using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.DataAccessLayer.Concrete.GenericRepository;
 using OA.EntityLayer.Concrete;
-using OA.EntityLayer.Requests.RoleRequests;
+using OA.EntityLayer.Requests.AuditLogRequests;
 
 namespace OA.DataAccessLayer.Concrete
 {
-	public class RoleDal : GenericRepository<Role, InsertRoleRequest, UpdateRoleRequest>, IRoleDal
+	public class AuditLogDal : GenericRepository<AuditLog, InsertLogRequest, UpdateLogRequest>, IAuditLogDal
 	{
-		public RoleDal(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<Role, InsertRoleRequest, UpdateRoleRequest>> logger)
+		public AuditLogDal(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<AuditLog, InsertLogRequest, UpdateLogRequest>> logger)
 			: base(sqlToolsProvider, dapperContext, logger)
 		{
 
