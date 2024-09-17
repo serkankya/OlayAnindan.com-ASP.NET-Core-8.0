@@ -5,13 +5,16 @@ using OA.BusinessLayer.Abstract.GenericRepository;
 
 namespace OA.DataAccessLayer.Concrete.GenericRepository
 {
-	public class GenericRepository<T> : IGenericRepository<T> where T : class, new()
+	public class GenericRepository<T, InsertTRequest, UpdateTRequest> : IGenericRepository<T, InsertTRequest, UpdateTRequest>
+	where T : class, new()
+	where InsertTRequest : class
+	where UpdateTRequest : class
 	{
 		private readonly ISqlToolsProvider _sqlToolsProvider;
 		private readonly IDapperContext _dapperContext;
-		private readonly ILogger<GenericRepository<T>> _logger;
+		private readonly ILogger<GenericRepository<T, InsertTRequest, UpdateTRequest>> _logger;
 
-		public GenericRepository(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<T>> logger)
+		public GenericRepository(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<T, InsertTRequest, UpdateTRequest>> logger)
 		{
 			_sqlToolsProvider = sqlToolsProvider;
 			_dapperContext = dapperContext;
@@ -102,7 +105,7 @@ namespace OA.DataAccessLayer.Concrete.GenericRepository
 			}
 		}
 
-		public async Task<bool> InsertAsync(T entity)
+		public async Task<bool> InsertAsync(InsertTRequest request)
 		{
 			try
 			{
@@ -117,7 +120,7 @@ namespace OA.DataAccessLayer.Concrete.GenericRepository
 					var parameters = new DynamicParameters();
 					foreach (var prop in columnNamePropertyNameDict.Values)
 					{
-						parameters.Add($"@{prop}", typeof(T).GetProperty(prop)?.GetValue(entity));
+						parameters.Add($"@{prop}", typeof(InsertTRequest).GetProperty(prop)?.GetValue(request));
 					}
 
 					int rowsAffected = await sqlConnection.ExecuteAsync(sql, parameters);
@@ -155,7 +158,7 @@ namespace OA.DataAccessLayer.Concrete.GenericRepository
 			}
 		}
 
-		public async Task<bool> UpdateAsync(T entity)
+		public async Task<bool> UpdateAsync(UpdateTRequest request)
 		{
 			try
 			{
@@ -173,9 +176,9 @@ namespace OA.DataAccessLayer.Concrete.GenericRepository
 					var parameters = new DynamicParameters();
 					foreach (var prop in columnNamePropertyNameDict.Values)
 					{
-						parameters.Add($"@{prop}", typeof(T).GetProperty(prop)?.GetValue(entity));
+						parameters.Add($"@{prop}", typeof(UpdateTRequest).GetProperty(prop)?.GetValue(request));
 					}
-					parameters.Add($"@{propertyName}", typeof(T).GetProperty(propertyName)?.GetValue(entity));
+					parameters.Add($"@{propertyName}", typeof(UpdateTRequest).GetProperty(propertyName)?.GetValue(request));
 
 					int rowsAffected = await sqlConnection.ExecuteAsync(sql, parameters);
 					return rowsAffected > 0;

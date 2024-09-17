@@ -4,6 +4,8 @@ using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.DataAccessLayer.Concrete;
 using OA.DataAccessLayer.Concrete.Dapper;
 using OA.DataAccessLayer.Concrete.GenericRepository;
+using OA.EntityLayer.Concrete;
+using OA.EntityLayer.Requests.RoleRequests;
 
 namespace OA.WebAPI.Containers
 {
@@ -14,8 +16,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IDapperContext, DapperContext>();
 			services.AddTransient<ISqlToolsProvider, SqlToolsProvider>();
 
-			
-			services.AddTransient<IRoleDal, RoleDal>();
+			services.AddTransient<IGenericRepository<Role, InsertRoleRequest, UpdateRoleRequest>, GenericRepository<Role,InsertRoleRequest, UpdateRoleRequest>>();
 		}
 	}
 }
