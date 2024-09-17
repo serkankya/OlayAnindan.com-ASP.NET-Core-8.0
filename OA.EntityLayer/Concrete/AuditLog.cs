@@ -23,5 +23,8 @@ namespace OA.EntityLayer.Concrete
 
         [Column("ActionDate")]
         public DateTime ActionDate { get; set; }
-    }
+
+		[Column("Status")]
+		public bool Status { get; set; }
+	}
 }

@@ -42,8 +42,8 @@ namespace OA.EntityLayer.Concrete
 		[Column("UpdatedAt")]
 		public DateTime UpdatedAt { get; set; }
 
-		[Column("IsActive")]
-		public bool IsActive { get; set; }
+		[Column("Status")]
+		public bool Status { get; set; }
 
 		[Column("LastLogin")]
 		public DateTime LastLogin { get; set; }

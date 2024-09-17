@@ -20,5 +20,8 @@ namespace OA.EntityLayer.Concrete
 
         [Column("Description")]
         public string? Description { get; set; }
-    }
+
+		[Column("Status")]
+		public bool Status { get; set; }
+	}
 }

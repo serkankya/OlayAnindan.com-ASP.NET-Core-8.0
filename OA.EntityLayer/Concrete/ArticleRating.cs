@@ -26,5 +26,8 @@ namespace OA.EntityLayer.Concrete
 
 		[Column("CreatedAt")]
 		public DateTime CreatedAt { get; set; }
+
+		[Column("Status")]
+		public bool Status { get; set; }
 	}
 }

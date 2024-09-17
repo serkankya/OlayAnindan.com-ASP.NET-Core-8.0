@@ -5,6 +5,7 @@ using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.DataAccessLayer.Concrete;
 using OA.DataAccessLayer.Concrete.Dapper;
 using OA.DataAccessLayer.Concrete.GenericRepository;
+using OA.WebAPI.Containers;
 
 namespace OA.WebAPI
 {
@@ -23,11 +24,8 @@ namespace OA.WebAPI
 
 			builder.Services.Configure<ContextOption>(builder.Configuration.GetSection(ContextOption.ConnectionString));
 
-
-			builder.Services.AddTransient<IDapperContext, DapperContext>();
-			builder.Services.AddTransient<ISqlToolsProvider, SqlToolsProvider>();
-
-			builder.Services.AddTransient<IRoleDal, RoleDal>();
+			//Containers --> Extensions
+			builder.Services.ContainerDependencies();
 
 			var app = builder.Build();
 

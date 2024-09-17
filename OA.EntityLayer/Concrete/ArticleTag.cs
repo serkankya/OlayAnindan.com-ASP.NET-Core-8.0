@@ -15,5 +15,8 @@ namespace OA.EntityLayer.Concrete
 
         [Column("TagId")]
         public int TagId { get; set; }
-    }
+
+		[Column("Status")]
+		public bool Status { get; set; }
+	}
 }

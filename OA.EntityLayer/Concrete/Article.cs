@@ -46,6 +46,6 @@ namespace OA.EntityLayer.Concrete
         public DateTime UpdatedAt { get; set; }
 
         [Column("Status")]
-        public DateTime Status { get; set; }
+        public bool Status { get; set; }
     }
 }

@@ -27,8 +27,10 @@ namespace OA.EntityLayer.Concrete
         [Column("AltText")]
         public string? AltText { get; set; }
 
-
         [Column("UploadedAt")]
         public DateTime UploadedAt { get; set; }
-    }
+
+		[Column("Status")]
+		public bool Status { get; set; }
+	}
 }

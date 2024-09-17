@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace OA.EntityLayer.Requests.ArticleTagRequests
 {
-	public record UpdateArticleRequest(int ArticleId, int TagId);
+	public record UpdateArticleRequest(int ArticleId, int TagId, bool Status);
 }
