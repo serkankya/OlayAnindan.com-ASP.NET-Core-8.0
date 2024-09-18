@@ -114,13 +114,16 @@ namespace OA.DataAccessLayer.Concrete.GenericRepository
 					string tableName = _sqlToolsProvider.GetTableName<T>();
 					Dictionary<string, string> columnNamePropertyNameDict = _sqlToolsProvider.GetColumnAndPropertyNames<T>(key: false);
 
-					var sql = $"INSERT INTO {tableName} ({string.Join(", ", columnNamePropertyNameDict.Keys)}) " +
-							  $"VALUES ({string.Join(", ", columnNamePropertyNameDict.Values.Select(propName => $"@{propName}"))})";
+					var columnsToInsert = columnNamePropertyNameDict.Keys
+						.Where(key => key != "CreatedAt" && key != "Status");
+
+					var sql = $"INSERT INTO {tableName} ({string.Join(", ", columnsToInsert)}) " +
+							  $"VALUES ({string.Join(", ", columnsToInsert.Select(propName => $"@{columnNamePropertyNameDict[propName]}"))})";
 
 					var parameters = new DynamicParameters();
-					foreach (var prop in columnNamePropertyNameDict.Values)
+					foreach (var prop in columnsToInsert)
 					{
-						parameters.Add($"@{prop}", typeof(InsertTRequest).GetProperty(prop)?.GetValue(request));
+						parameters.Add($"@{columnNamePropertyNameDict[prop]}", typeof(InsertTRequest).GetProperty(columnNamePropertyNameDict[prop])?.GetValue(request));
 					}
 
 					int rowsAffected = await sqlConnection.ExecuteAsync(sql, parameters);

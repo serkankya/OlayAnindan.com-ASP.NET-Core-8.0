@@ -11,8 +11,9 @@ namespace OA.WebAPI.Controllers
 	[ApiController]
 	public class RoleController : GenericApiController<Role, InsertRoleRequest, UpdateRoleRequest>
 	{
-        public RoleController(IGenericRepository<Role, InsertRoleRequest, UpdateRoleRequest> repository) : base(repository) 
-        {
-        }
-    }
+		public RoleController(IGenericRepository<Role, InsertRoleRequest, UpdateRoleRequest> repository)
+			: base(repository)
+		{
+		}
+	}
 }

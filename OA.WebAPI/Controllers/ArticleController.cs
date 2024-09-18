@@ -2,18 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.EntityLayer.Concrete;
-using OA.EntityLayer.Requests.UserRequests;
+using OA.EntityLayer.Requests.ArticleRequests;
 
 namespace OA.WebAPI.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class UserController : GenericApiController<User, InsertUserRequest, UpdateUserRequest>
+	public class ArticleController : GenericApiController<Article, InsertArticleRequest, UpdateArticleRequest>
 	{
-		public UserController(IGenericRepository<User, InsertUserRequest, UpdateUserRequest> repository)
+		public ArticleController(IGenericRepository<Article, InsertArticleRequest, UpdateArticleRequest> repository)
 			: base(repository)
 		{
-
 		}
 	}
 }
