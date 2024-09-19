@@ -39,6 +39,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IGenericRepository<Tag, InsertTagRequest, UpdateTagRequest>, GenericRepository<Tag, InsertTagRequest, UpdateTagRequest>>();
 
 			services.AddTransient<ILoginDal, LoginDal>();
+			services.AddTransient<IUserDal, UserDal>();
 		}
 	}
 }

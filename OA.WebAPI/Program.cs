@@ -1,11 +1,6 @@
-
-using OA.BusinessLayer.Abstract;
-using OA.BusinessLayer.Abstract.Dapper;
-using OA.BusinessLayer.Abstract.GenericRepository;
-using OA.DataAccessLayer.Concrete;
 using OA.DataAccessLayer.Concrete.Dapper;
-using OA.DataAccessLayer.Concrete.GenericRepository;
 using OA.WebAPI.Containers;
+using OA.WebAPI.JwtTools;
 
 namespace OA.WebAPI
 {
@@ -15,13 +10,13 @@ namespace OA.WebAPI
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
+			builder.Services.AddJwtAuthentication(builder.Configuration);
 
 			builder.Services.AddControllers();
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
+			//Database connection string
 			builder.Services.Configure<ContextOption>(builder.Configuration.GetSection(ContextOption.ConnectionString));
 
 			//Containers --> Extensions
@@ -29,7 +24,6 @@ namespace OA.WebAPI
 
 			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
@@ -38,8 +32,10 @@ namespace OA.WebAPI
 
 			app.UseHttpsRedirection();
 
-			app.UseAuthorization();
+			//For JWT(Before authorization)
+			app.UseAuthentication();
 
+			app.UseAuthorization();
 
 			app.MapControllers();
 
