@@ -1,5 +1,7 @@
-﻿using OA.BusinessLayer.Abstract.Dapper;
+﻿using OA.BusinessLayer.Abstract;
+using OA.BusinessLayer.Abstract.Dapper;
 using OA.BusinessLayer.Abstract.GenericRepository;
+using OA.DataAccessLayer.Concrete;
 using OA.DataAccessLayer.Concrete.Dapper;
 using OA.DataAccessLayer.Concrete.GenericRepository;
 using OA.EntityLayer.Concrete;
@@ -35,6 +37,8 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IGenericRepository<Media, InsertMediaRequest, UpdateMediaRequest>, GenericRepository<Media, InsertMediaRequest, UpdateMediaRequest>>();
 			services.AddTransient<IGenericRepository<Notification, InsertNotificationRequest, UpdateNotificationRequest>, GenericRepository<Notification, InsertNotificationRequest, UpdateNotificationRequest>>();
 			services.AddTransient<IGenericRepository<Tag, InsertTagRequest, UpdateTagRequest>, GenericRepository<Tag, InsertTagRequest, UpdateTagRequest>>();
+
+			services.AddTransient<ILoginDal, LoginDal>();
 		}
 	}
 }
