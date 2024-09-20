@@ -1,5 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using OA.DataAccessLayer.Concrete.Dapper;
 using OA.WebAPI.Containers;
+using OA.WebAPI.FluentValidation;
 using OA.WebAPI.JwtTools;
 
 namespace OA.WebAPI
@@ -13,6 +16,11 @@ namespace OA.WebAPI
 			builder.Services.AddJwtAuthentication(builder.Configuration);
 
 			builder.Services.AddControllers();
+
+			//Fluent validation
+			builder.Services.AddFluentValidationAutoValidation()
+				.AddFluentValidationClientsideAdapters();
+
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 

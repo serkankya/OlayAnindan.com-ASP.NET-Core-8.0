@@ -1,4 +1,5 @@
-﻿using OA.BusinessLayer.Abstract;
+﻿using FluentValidation;
+using OA.BusinessLayer.Abstract;
 using OA.BusinessLayer.Abstract.Dapper;
 using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.DataAccessLayer.Concrete;
@@ -16,6 +17,7 @@ using OA.EntityLayer.Requests.NotificationRequests;
 using OA.EntityLayer.Requests.RoleRequests;
 using OA.EntityLayer.Requests.TagRequests;
 using OA.EntityLayer.Requests.UserRequests;
+using OA.WebAPI.FluentValidation;
 
 namespace OA.WebAPI.Containers
 {
@@ -40,6 +42,15 @@ namespace OA.WebAPI.Containers
 
 			services.AddTransient<ILoginDal, LoginDal>();
 			services.AddTransient<IUserDal, UserDal>();
+
+			//Fluent validation validators
+			services.AddValidatorsFromAssemblyContaining<UserValidator>();
+			services.AddValidatorsFromAssemblyContaining<ArticleValidator>();
+			services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
+			services.AddValidatorsFromAssemblyContaining<CommentValidator>();
+			services.AddValidatorsFromAssemblyContaining<LoginValidator>();
+			services.AddValidatorsFromAssemblyContaining<RoleValidator>();
+			services.AddValidatorsFromAssemblyContaining<TagValidator>();
 		}
 	}
 }
