@@ -1,8 +1,19 @@
-﻿
-@{
-    ViewData["Title"] = "Dashboard";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+﻿@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Dashboard page</h1>
+@await Component.InvokeAsync("_DashboardStatisticsComponentPartial")
+
+@await Component.InvokeAsync("_DashboardGraphicsComponentPartial")
+
+@await Component.InvokeAsync("_DashboardLatestNewsComponentPartial")
+
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		@await Component.InvokeAsync("_DashboardMessagesComponentPartial")
+
+		@await Component.InvokeAsync("_DashboardToDoListComponentPartial")
+	</div>
+</div>
 
