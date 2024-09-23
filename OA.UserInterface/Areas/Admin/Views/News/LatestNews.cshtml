@@ -1,0 +1,50 @@
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model List<ResultArticleRequest>
+
+@{
+	ViewData["Title"] = "LatestNews";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+	<div class="bg-light text-center rounded p-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">Eklenen Son Haberler</h6>
+		</div>
+		<div class="table-responsive">
+			<table class="table text-start align-middle table-bordered table-hover mb-0">
+				<thead>
+					<tr class="text-dark">
+						<th scope="col">Tarih</th>
+						<th scope="col">Başlık</th>
+						<th scope="col">Kullanıcı</th>
+						<th scope="col">Görüntülenme</th>
+						<th scope="col">Öne Çıkar</th>
+						<th scope="col">Detaylar</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.CreatedAt</td>
+							<td>@item.Title</td>
+							<td>@item.UserId</td>
+							<td>@item.ViewCount</td>
+							@if (item.IsFeatured == true)
+							{
+								<td><a class="btn btn-sm btn-danger" href="">İptal Et</a></td>
+							}
+							else
+							{
+								<td><a class="btn btn-sm btn-success" href="">Öne Çıkar</a></td>
+							}
+							<td><a class="btn btn-sm btn-primary" href="">Sitede Görüntüle</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
