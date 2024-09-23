@@ -1,8 +1,45 @@
-﻿
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model InsertArticleRequest
+
 @{
-    ViewData["Title"] = "ShareNews";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "ShareNews";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
-
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-12">
+			<div class="bg-light rounded h-100 p-4">
+				<h6 class="mb-4">Yeni Haber Girişi</h6>
+				<form asp-action="ShareNews" asp-controller="News" asp-area="Admin" method="post">
+					<input type="hidden" name="UserId" value="2"/>
+					<div class="form-floating mb-3">
+						<select class="form-select" name="CategoryId" id="floatingSelect">
+							<option selected>Kategorileri görüntüleyin</option>
+							<option value="1">Bir</option>
+							<option value="2">İki</option>
+							<option value="3">Üç</option>
+						</select>
+						<label for="floatingSelect">Kategori seçiniz</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" name="Title" id="floatingInput"
+							   placeholder="Lütfen haber başlığı giriniz">
+						<label for="floatingInput">Haber Başlığı</label>
+					</div>
+					<div class="form-floating">
+						<textarea class="form-control" name="ContentText" placeholder="Haber içeriğini giriniz"
+								  id="floatingTextarea" style="height: 250px; max-height:500px; min-height:200px;"></textarea>
+						<label for="floatingTextarea">Haber İçeriği</label>
+					</div>
+					<div class="form-floating">
+						<textarea class="form-control" name="Summary" placeholder="Haber özetini giriniz"
+								  id="floatingTextarea" style="height: 200px; max-height:350px; min-height:175px;"></textarea>
+						<label for="floatingTextarea">Haber Özeti</label>
+					</div>
+					<input type="submit" value="Haberi Paylaş" class="btn btn-primary py-3 px-5">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
