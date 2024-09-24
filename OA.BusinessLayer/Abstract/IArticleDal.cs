@@ -6,5 +6,7 @@ namespace OA.BusinessLayer.Abstract
 {
 	public interface IArticleDal : IGenericRepository<Article, InsertArticleRequest, UpdateArticleRequest>
 	{
+		Task<List<ResultArticleRequest>> GetResultArticles();
+		Task<ResultArticleRequest> GetResultArticleById(int articleId);
 	}
 }

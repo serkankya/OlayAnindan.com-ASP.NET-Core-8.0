@@ -13,16 +13,25 @@ namespace OA.EntityLayer.Concrete
         [Column("ArticleId")]
         public int ArticleId { get; set; }
 
-        [Column("FilePath")]
-        public string? FilePath { get; set; }
+        [Column("MainMediaPath")]
+        public string? MainMediaPath { get; set; }
 
-        [Column("FileType")]
-        public string? FileType { get; set; }
+        [Column("MainMediaType")]
+        public string? MainMediaType { get; set; }
 
-        [Column("AltText")]
-        public string? AltText { get; set; }
+		[Column("FirstMediaPath")]
+		public string? FirstMediaPath { get; set; }
 
-        [Column("UploadedAt")]
+		[Column("FirstMediaType")]
+		public string? FirstMediaType { get; set; }
+
+		[Column("SecondMediaPath")]
+		public string? SecondMediaPath { get; set; }
+
+		[Column("SecondMediaType")]
+		public string? SecondMediaType { get; set; }
+
+		[Column("UploadedAt")]
         public DateTime UploadedAt { get; set; }
 
 		[Column("Status")]
