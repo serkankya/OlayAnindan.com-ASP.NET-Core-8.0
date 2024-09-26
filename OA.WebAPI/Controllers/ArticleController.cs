@@ -4,6 +4,7 @@ using OA.BusinessLayer.Abstract;
 using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.EntityLayer.Concrete;
 using OA.EntityLayer.Requests.ArticleRequests;
+using OA.EntityLayer.Requests.TagRequests;
 
 namespace OA.WebAPI.Controllers
 {
@@ -31,6 +32,18 @@ namespace OA.WebAPI.Controllers
 		{
 			var value = await _articleDal.GetResultArticleById(id);
 			return Ok(value);
+		}
+
+		[HttpPost("InsertTransaction")]
+		public async Task<IActionResult> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)
+		{
+			bool isInserted = await _articleDal.InsertTransaction(insertArticleTransactionRequest);
+
+			if (!isInserted)
+			{
+				return BadRequest("Insert failed.");
+			}
+			return Ok("Entity inserted successfully.");
 		}
 	}
 }
