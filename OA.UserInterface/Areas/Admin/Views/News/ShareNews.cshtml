@@ -1,5 +1,5 @@
 ﻿@using OA.EntityLayer.Requests.ArticleRequests
-@model InsertArticleRequest
+@model InsertArticleTransactionRequest
 
 @{
 	ViewData["Title"] = "ShareNews";
@@ -11,8 +11,8 @@
 		<div class="col-12">
 			<div class="bg-light rounded h-100 p-4">
 				<h6 class="mb-4">Yeni Haber Girişi</h6>
-				<form asp-action="ShareNews" asp-controller="News" asp-area="Admin" method="post">
-					<input type="hidden" name="UserId" value="2"/>
+				<form asp-action="ShareNews" asp-controller="News" asp-area="Admin" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="UserId" value="2" />
 					<div class="form-floating mb-3">
 						<select class="form-select" name="CategoryId" id="floatingSelect">
 							<option selected>Kategorileri görüntüleyin</option>
@@ -37,6 +37,52 @@
 								  id="floatingTextarea" style="height: 200px; max-height:350px; min-height:175px;"></textarea>
 						<label for="floatingTextarea">Haber Özeti</label>
 					</div>
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" name="IsFeatured" id="isFeaturedCheck" value="true">
+						<input type="hidden" name="IsFeatured" value="false">
+						<label class="form-check-label" for="isFeaturedCheck">Öne Çıkar</label>
+					</div>
+					<div class="mb-3">
+						<label for="formFileMain" class="form-label">Birinci resmi seçiniz</label>
+						<input class="form-control" type="file" id="formFileMain" name="MainMediaPath">
+					</div>
+					<div class="mb-3">
+						<label for="formFileFirst" class="form-label">İkinci resmi seçiniz</label>
+						<input class="form-control" type="file" id="formFileFirst" name="FirstMediaPath">
+					</div>
+					<div class="mb-3">
+						<label for="formFileSecond" class="form-label">Üçüncü resmi seçiniz</label>
+						<input class="form-control" type="file" id="formFileSecond" name="SecondMediaPath">
+					</div>
+
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInputTags" placeholder="Haber etiketlerini giriniz">
+						<label for="floatingInputTags">Etiketler</label>
+					</div>
+					<ul id="tagList"></ul>
+					<input type="hidden" name="TagName" id="TagNameHidden" />
+
+					<script>
+						let tags = [];
+						const tagInput = document.getElementById('floatingInputTags');
+						const tagList = document.getElementById('tagList');
+						const tagNameHidden = document.getElementById('TagNameHidden');
+
+						tagInput.addEventListener('keydown', function (event) {
+							if (event.key === ',') {
+								event.preventDefault();
+								let tag = tagInput.value.trim();
+								if (tag) {
+									tags.push(tag);
+									const li = document.createElement('li');
+									li.innerText = tag;
+									tagList.appendChild(li);
+									tagInput.value = '';
+									tagNameHidden.value = JSON.stringify(tags); // Tags as JSON string
+								}
+							}
+						});
+					</script>
 					<input type="submit" value="Haberi Paylaş" class="btn btn-primary py-3 px-5">
 				</form>
 			</div>

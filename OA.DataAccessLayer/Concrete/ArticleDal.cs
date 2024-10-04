@@ -78,7 +78,7 @@ namespace OA.DataAccessLayer.Concrete
 							parametersForArticle.Add("@title", insertArticleTransactionRequest.Title);
 							parametersForArticle.Add("@contentText", insertArticleTransactionRequest.ContentText);
 							parametersForArticle.Add("@summary", insertArticleTransactionRequest.Summary);
-							parametersForArticle.Add("@isFeatured", false);
+							parametersForArticle.Add("@isFeatured", insertArticleTransactionRequest.IsFeatured);
 
 							int insertedArticleId = await connection.QuerySingleAsync<int>(queryForArticle, parametersForArticle, sqlTransaction);
 							#endregion
