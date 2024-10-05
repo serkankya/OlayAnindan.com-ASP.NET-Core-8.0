@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OA.EntityLayer.Requests.ArticleRequests;
+using OA.EntityLayer.Requests.CommentRequests;
 using System.Text;
 
 namespace OA.UserInterface.Areas.Admin.Controllers
@@ -106,8 +107,19 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 			return View();
 		}
 
-		public IActionResult LatestComments()
+		public async Task<IActionResult> LatestComments()
 		{
+			var client = _httpClientFactory.CreateClient();
+			var response = await client.GetAsync("https://localhost:7090/api/Comment/GetResultComments");
+
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonData = await response.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultCommentRequest>>(jsonData);
+
+				return View(values);
+			}
+
 			return View();
 		}
 	}

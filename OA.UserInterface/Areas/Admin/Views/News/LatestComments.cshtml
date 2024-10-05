@@ -1,8 +1,48 @@
-﻿
+﻿@using OA.EntityLayer.Requests.CommentRequests
+@model List<ResultCommentRequest>
+
 @{
-    ViewData["Title"] = "LatestComments";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "LatestComments";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>LatestComments</h1>
+<link href="~/admin/css/comment.css" rel="stylesheet">
+
+<div class="container comment-page">
+	<h3 class="text-center mb-4">Yorum Yönetimi</h3>
+
+	@foreach (var item in Model)
+	{
+		if (item.Status == true)
+		{
+			<div class="comment-item">
+				<h5>Kullanıcı : @item.Username</h5>
+				<p href="#"><strong>Haber : </strong>: @item.Title</p>
+				<p><em>Yorum:</em> @item.CommentText</p>
+				<div class="comment-actions">
+					<button class="btn btn-edit" href="#">Habere Git</button>
+					<button class="btn btn-danger" href="#">Yorumu Sil</button>
+				</div>
+			</div>
+		}
+	}
+
+	<br /> <br />
+	<h3>Silinenler</h3>
+	@foreach (var item in Model)
+	{
+		if (item.Status == false)
+		{
+			<div class="comment-item">
+				<h5>Kullanıcı : @item.Username</h5>
+				<p href="#"><strong>Haber : </strong>: @item.Title</p>
+				<p><em>Yorum:</em> @item.CommentText</p>
+				<div class="comment-actions">
+					<button class="btn btn-edit" href="#">Habere Git</button>
+					<button class="btn btn-info" href="#">Aktifleştir</button>
+				</div>
+			</div>
+		}
+	}
+</div>
 
