@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OA.BusinessLayer.Abstract.GenericRepository;
 using OA.EntityLayer.Concrete;
 using OA.EntityLayer.Requests.AuditLogRequests;

@@ -7,5 +7,6 @@ namespace OA.BusinessLayer.Abstract
 	public interface ICommentDal: IGenericRepository<Comment, InsertCommentRequest, UpdateCommentRequest>
 	{
 		Task<List<ResultCommentRequest>> GetResultComments();
+		Task<bool> ActivateComment(int id);
 	}
 }

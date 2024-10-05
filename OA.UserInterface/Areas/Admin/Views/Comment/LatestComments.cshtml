@@ -20,8 +20,8 @@
 				<p href="#"><strong>Haber : </strong>: @item.Title</p>
 				<p><em>Yorum:</em> @item.CommentText</p>
 				<div class="comment-actions">
-					<button class="btn btn-edit" href="#">Habere Git</button>
-					<button class="btn btn-danger" href="#">Yorumu Sil</button>
+					<a class="btn btn-edit" href="#" >Habere Git</a>
+					<a class="btn btn-danger" href="/Admin/Comment/RemoveComment/@item.CommentId">Yorumu Sil</a>
 				</div>
 			</div>
 		}
@@ -38,11 +38,13 @@
 				<p href="#"><strong>Haber : </strong>: @item.Title</p>
 				<p><em>Yorum:</em> @item.CommentText</p>
 				<div class="comment-actions">
-					<button class="btn btn-edit" href="#">Habere Git</button>
-					<button class="btn btn-info" href="#">Aktifleştir</button>
+					<a class="btn btn-edit" href="#">Habere Git</a>
+					<a class="btn btn-info" href="/Admin/Comment/ActivateComment/@item.CommentId">Aktifleştir</a>
 				</div>
 			</div>
 		}
 	}
 </div>
+
+
 

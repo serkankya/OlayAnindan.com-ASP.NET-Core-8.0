@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OA.EntityLayer.Requests.ArticleRequests;
-using OA.EntityLayer.Requests.CommentRequests;
+using OA.UserInterface.Models;
 using System.Text;
 
 namespace OA.UserInterface.Areas.Admin.Controllers
@@ -10,16 +11,19 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 	public class NewsController : Controller
 	{
 		readonly IHttpClientFactory _httpClientFactory;
+		readonly ApiSettings _apiSettings;
 
-		public NewsController(IHttpClientFactory httpClientFactory)
+		public NewsController(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
 		{
 			_httpClientFactory = httpClientFactory;
+			_apiSettings = apiSettings.Value;
 		}
 
 		public async Task<IActionResult> LatestNews()
 		{
 			var client = _httpClientFactory.CreateClient();
-			var response = await client.GetAsync("https://localhost:7090/api/Article/GetActives");
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var response = await client.GetAsync("Article/GetActives");
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -90,9 +94,10 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 			};
 
 			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
 			var jsonData = JsonConvert.SerializeObject(insertArticleTransactionRequest);
 			StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-			var response = await client.PostAsync("https://localhost:7090/api/Article/InsertTransaction", content);
+			var response = await client.PostAsync("InsertTransaction", content);
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -102,22 +107,6 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 			{
 				var error = await response.Content.ReadAsStringAsync();
 				Console.WriteLine("Error occured: " + error);
-			}
-
-			return View();
-		}
-
-		public async Task<IActionResult> LatestComments()
-		{
-			var client = _httpClientFactory.CreateClient();
-			var response = await client.GetAsync("https://localhost:7090/api/Comment/GetResultComments");
-
-			if (response.IsSuccessStatusCode)
-			{
-				var jsonData = await response.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultCommentRequest>>(jsonData);
-
-				return View(values);
 			}
 
 			return View();

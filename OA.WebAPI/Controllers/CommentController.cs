@@ -24,5 +24,18 @@ namespace OA.WebAPI.Controllers
 			var values = await _commentDal.GetResultComments();
 			return Ok(values);
 		}
+
+		[HttpPut("ActivateComment/{id}")]
+		public async Task<IActionResult> ActivateComment(int id)
+		{
+			bool isActivated = await _commentDal.ActivateComment(id);
+
+			if (isActivated == false)
+			{
+				return BadRequest("Activation failed.");
+			}
+
+			return Ok("Comment activated successfully.");
+		}
 	}
 }

@@ -18,6 +18,26 @@ namespace OA.DataAccessLayer.Concrete
 			_dapperContext = dapperContext;
 		}
 
+		public async Task<bool> ActivateComment(int id)
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string queryForActivate = "UPDATE Comments SET Status = 1 WHERE CommentId = @commentId";
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@commentId", id);
+
+				int affectedRows = await connection.ExecuteAsync(queryForActivate, parameters);
+
+				if (affectedRows > 0)
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
+
 		public async Task<List<ResultCommentRequest>> GetResultComments()
 		{
 			using (var connection = _dapperContext.GetConnection())
