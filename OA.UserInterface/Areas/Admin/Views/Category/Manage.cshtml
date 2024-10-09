@@ -1,0 +1,57 @@
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model List<ResultCategoryRequest>
+
+@{
+	ViewData["Title"] = "Manage";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+	<div class="bg-light text-center rounded p-4">
+		<div class="d-flex align-items-center justify-content-between mb-4">
+			<h6 class="mb-0">Kategoriler</h6>
+		</div>
+		<div class="table-responsive">
+			<table class="table text-start align-middle table-bordered table-hover mb-0">
+				<thead>
+					<tr class="text-dark">
+						<th scope="col">Kategori</th>
+						<th scope="col">Açıklama</th>
+						<th scope="col">Eklenme Tarihi</th>
+						<th scope="col">Son Güncellenme Tarihi</th>
+						<th scope="col">İşlem</th>
+						<th scope="col">Güncelle</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.CategoryName</td>
+							<td>@item.Description</td>
+							<td>@item.CreatedDate</td>
+							@if (item.UpdatedDate.Year < 2023)
+							{
+								<td>Henüz güncellenmedi.</td>
+							}
+							else
+							{
+								<td>@item.UpdatedDate</td>
+							}
+							@if (item.Status == true)
+							{
+								<td><a class="btn btn-sm btn-danger" href="/Admin/Category/RemoveCategory/@item.CategoryId">Sil</a></td>
+							}
+							else
+							{
+								<td><a class="btn btn-sm btn-success" href="#">Aktifleştir</a></td>
+							}
+							<td><a class="btn btn-sm btn-primary" href="#">Güncelle</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
