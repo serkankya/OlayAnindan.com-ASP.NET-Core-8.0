@@ -6,5 +6,6 @@ namespace OA.BusinessLayer.Abstract
 {
 	public interface ICategoryDal : IGenericRepository<Category, InsertCategoryRequest, UpdateCategoryRequest>
 	{
+		Task<bool> ActivateCategory(int id);
 	}
 }

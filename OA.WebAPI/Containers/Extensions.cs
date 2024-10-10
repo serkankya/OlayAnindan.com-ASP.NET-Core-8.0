@@ -45,6 +45,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IArticleDal, ArticleDal>();
 			services.AddTransient<IArticleTagDal, ArticleTagDal>();
 			services.AddTransient<ICommentDal, CommentDal>();
+			services.AddTransient<ICategoryDal, CategoryDal>();
 
 			//Fluent validation validators
 			services.AddValidatorsFromAssemblyContaining<UserValidator>();

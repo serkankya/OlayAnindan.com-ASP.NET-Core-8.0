@@ -1,0 +1,34 @@
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model InsertCategoryRequest
+
+@{
+	ViewData["Title"] = "InsertCategory";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-12">
+			<div class="col-sm-12 col-xl-12">
+				<div class="bg-light rounded h-100 p-4">
+					<h6 class="mb-4">Yeni Kategori Ekle</h6>
+					<form asp-action="InsertCategory" asp-controller="Category" asp-area="Admin" method="post">
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInput" name="CategoryName"
+							   placeholder="Buraya giriniz">
+						<label for="floatingInput">Kategori Adı</label>
+					</div>
+					<div class="form-floating">
+						<textarea class="form-control" placeholder="Açıklamayı buraya giriniz"
+								  id="floatingTextarea" name="Description" style="height: 150px;"></textarea>
+						<label for="floatingTextarea">Açıklama</label>
+					</div>
+					<br />
+					<input type="submit" value="Kategoriyi Ekle" class="btn btn-primary py-3 px-5">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

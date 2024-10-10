@@ -1,0 +1,76 @@
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model ResultCategoryRequest
+
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-12">
+			<div class="col-sm-12 col-xl-12">
+				<div class="bg-light rounded h-100 p-4">
+					<h6 class="mb-4">Kategori Güncelleme</h6>
+					<form asp-action="UpdateCategory" asp-controller="Category" asp-area="Admin" method="post">
+						<input type="hidden" value="@Model.CategoryId" name="CategoryId" />
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="floatingInput" name="CategoryName"
+								   value="@Model.CategoryName">
+							<label for="floatingInput">Kategori Adı</label>
+						</div>
+						<div class="form-floating">
+							<textarea class="form-control"
+									  id="floatingTextarea" name="Description" style="height: 150px;">@Model.Description</textarea>
+							<label for="floatingTextarea">Açıklama</label>
+						</div>
+						<fieldset class="row mb-3">
+							<legend class="col-form-label col-sm-2 pt-0">Kategori Durumu</legend>
+							<div class="col-sm-10">
+								@if (@Model.Status == false)
+								{
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="Status"
+											   id="gridRadios1" value="false" checked>
+										<label class="form-check-label" for="gridRadios1">
+											Sil veya silinmiş ise öyle kalsın
+										</label>
+									</div>
+
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="Status"
+											   id="gridRadios2" value="true">
+										<label class="form-check-label" for="gridRadios2">
+											Aktifleştir veya aktif ise öyle kalsın
+										</label>
+									</div>
+								}
+								else
+								{
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="Status"
+											   id="gridRadios1" value="false">
+										<label class="form-check-label" for="gridRadios1">
+											Sil veya silinmiş ise öyle kalsın
+										</label>
+									</div>
+
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="Status"
+											   id="gridRadios2" value="true" checked>
+										<label class="form-check-label" for="gridRadios2">
+											Aktifleştir veya aktif ise öyle kalsın
+										</label>
+									</div>
+								}
+							</div>
+						</fieldset>
+						<br />
+						<input type="submit" value="Kategoriyi Güncelle" class="btn btn-primary py-3 px-5">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

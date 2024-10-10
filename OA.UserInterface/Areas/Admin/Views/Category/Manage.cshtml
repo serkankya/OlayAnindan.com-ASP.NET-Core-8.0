@@ -10,7 +10,9 @@
 	<div class="bg-light text-center rounded p-4">
 		<div class="d-flex align-items-center justify-content-between mb-4">
 			<h6 class="mb-0">Kategoriler</h6>
+			<a class="btn btn-success" href="/Admin/Category/InsertCategory">Yeni Kategori Girişi</a>
 		</div>
+		<br />
 		<div class="table-responsive">
 			<table class="table text-start align-middle table-bordered table-hover mb-0">
 				<thead>
@@ -44,9 +46,9 @@
 							}
 							else
 							{
-								<td><a class="btn btn-sm btn-success" href="#">Aktifleştir</a></td>
+								<td><a class="btn btn-sm btn-success" href="/Admin/Category/ActivateCategory/@item.CategoryId">Aktifleştir</a></td>
 							}
-							<td><a class="btn btn-sm btn-primary" href="#">Güncelle</a></td>
+							<td><a class="btn btn-sm btn-primary" href="/Admin/Category/UpdateCategory/@item.CategoryId">Güncelle</a></td>
 						</tr>
 					}
 				</tbody>
