@@ -12,8 +12,8 @@
         public string? ImageUrl { get; set; }
         public string? CreatedAt { get; set; }
         public string? UpdatedAt { get; set; }
-        public string? Status { get; set; }
-        public string? IsBlocked { get; set; }
+        public bool? Status { get; set; }
+        public bool? IsBlocked { get; set; }
         public string? LastLogin { get; set; }
     }
 }

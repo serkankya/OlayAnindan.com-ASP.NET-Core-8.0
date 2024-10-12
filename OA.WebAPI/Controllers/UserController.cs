@@ -46,5 +46,31 @@ namespace OA.WebAPI.Controllers
 			var values = await _userDal.GetUserById(id);
 			return Ok(values);
 		}
+
+		[HttpPut("BlockUser/{id}")]
+		public async Task<IActionResult> BlockUser(int id)
+		{
+			bool isBlocked = await _userDal.BlockUser(id);
+
+			if (isBlocked)
+			{
+				return Ok("User blocked successfully.");
+			}
+
+			return BadRequest("An error occured while blocking the user.");
+		}
+
+		[HttpPut("Unblock/{id}")]
+		public async Task<IActionResult> UnblockUser(int id)
+		{
+			bool isBlocked = await _userDal.UnblockUser(id);
+
+			if (isBlocked)
+			{
+				return Ok("User unblocked successfully.");
+			}
+
+			return BadRequest("An error occured while unblocking the user.");
+		}
 	}
 }

@@ -90,5 +90,37 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 
 			return View();
 		}
+
+		public async Task<IActionResult> BlockUser(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			StringContent content = new StringContent(string.Empty);
+
+			var response = await client.PutAsync("User/BlockUser/" + id, content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				return RedirectToAction("Manage", "User");
+			}
+
+			return View();
+		}
+
+		public async Task<IActionResult> UnblockUser(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			StringContent content = new StringContent(string.Empty);
+
+			var response = await client.PutAsync("User/UnblockUser/" + id, content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				return RedirectToAction("Manage", "User");
+			}
+
+			return View();
+		}
 	}
 }

@@ -40,6 +40,15 @@
 		<label>@item.LastLogin</label>
 		<br />
 		<a href="/Admin/User/GetUser/@item.UserId" class="btn btn-sm btn-primary">Üyeyi Göster</a>
+		<br />
+		@if(item.IsBlocked == false)
+		{
+			<a href="/Admin/User/BlockUser/@item.UserId" class="btn btn-sm btn-danger">Üyeyi Engelle</a>
+		}
+		else
+		{
+			<a href="/Admin/User/UnblockUser/@item.UserId" class="btn btn-sm btn-danger">Engeli Kaldır</a>
+		}
 	</div>
 }
 

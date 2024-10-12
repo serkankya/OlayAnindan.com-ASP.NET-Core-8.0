@@ -66,5 +66,45 @@ namespace OA.DataAccessLayer.Concrete
 				return value;
 			}
 		}
+
+		public async Task<bool> BlockUser(int id)
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string blockQuery = "UPDATE Users SET IsBlocked = 1 WHERE UserId = @userId";
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@userId", id);
+
+				int affectedRows = await connection.ExecuteAsync(blockQuery, parameters);
+
+				if (affectedRows > 0)
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
+
+		public async Task<bool> UnblockUser(int id)
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string unblockQuery = "UPDATE Users SET IsBlocked = 0 WHERE UserId = @userId";
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@userId", id);
+
+				int affectedRows = await connection.ExecuteAsync(unblockQuery, parameters);
+
+				if (affectedRows > 0)
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
 	}
 }

@@ -10,5 +10,7 @@ namespace OA.BusinessLayer.Abstract
 		Task<List<ResultUserRequest>> GetUserDetails();
 		Task<List<ResultUserRequest>> GetBlockedUsers();
 		Task<ResultUserRequest> GetUserById(int id);
+		Task<bool> BlockUser(int id);
+		Task<bool> UnblockUser(int id);
 	}
 }

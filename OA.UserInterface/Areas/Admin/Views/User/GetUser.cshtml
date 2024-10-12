@@ -35,5 +35,13 @@
 	<br />
 	<label>@Model.LastLogin</label>
 	<br />
+	@if (Model.IsBlocked == false)
+	{
+		<a href="/Admin/User/BlockUser/@Model.UserId" class="btn btn-sm btn-danger">Üyeyi Engelle</a>
+	}
+	else
+	{
+		<a href="/Admin/User/Unblock/@Model.UserId" class="btn btn-sm btn-danger">Engeli Kaldır</a>
+	}
 </div>
 
