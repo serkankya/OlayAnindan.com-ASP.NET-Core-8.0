@@ -11,9 +11,12 @@ namespace OA.WebAPI.Controllers
 	[ApiController]
 	public class UserController : GenericApiController<User, InsertUserRequest, UpdateUserRequest>
 	{
+		readonly IUserDal _userDal;
+
 		public UserController(IGenericRepository<User, InsertUserRequest, UpdateUserRequest> repository, IUserDal userDal)
 			: base(repository)
 		{
+			_userDal = userDal;
 		}
 
 		[Authorize]
@@ -21,6 +24,13 @@ namespace OA.WebAPI.Controllers
 		public IActionResult SecureEndpoint()
 		{
 			return Ok("This endpoint is accessible only to authenticated users.");
+		}
+
+		[HttpGet("GetUserDetails")]
+		public async Task<IActionResult> GetUserDetails()
+		{
+			var values = await _userDal.GetUserDetails();
+			return Ok(values);
 		}
 	}
 }

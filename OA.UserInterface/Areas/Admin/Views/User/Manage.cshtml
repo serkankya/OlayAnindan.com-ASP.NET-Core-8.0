@@ -1,0 +1,43 @@
+﻿@using OA.EntityLayer.Requests.UserRequests
+@model List<ResultUserRequest>
+
+@{
+	ViewData["Title"] = "Manage";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Manage User</h1>
+
+@foreach (var item in Model)
+{
+	<br />
+	<h6>***********</h6>
+	<div>
+		<label>@item.UserId</label>
+		<br />
+		<label>@item.RoleId</label>
+		<br />
+		<label>@item.RoleName</label>
+		<br />
+		<label>@item.Username</label>
+		<br />
+		<label>@item.Email</label>
+		<br />
+		<label>@item.Biography</label>
+		<br />
+		<label>@item.FullName</label>
+		<br />
+		<label>@item.ImageUrl</label>
+		<br />
+		<label>@item.CreatedAt</label>
+		<br />
+		<label>@item.UpdatedAt</label>
+		<br />
+		<label>@item.Status</label>
+		<br />
+		<label>@item.LastLogin</label>
+		<br />
+	</div>
+}
+
+

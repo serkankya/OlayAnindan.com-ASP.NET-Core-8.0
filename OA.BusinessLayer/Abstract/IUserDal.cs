@@ -7,5 +7,6 @@ namespace OA.BusinessLayer.Abstract
 {
     public interface IUserDal : IGenericRepository<User, InsertUserRequest, UpdateUserRequest>
 	{
+		Task<List<ResultUserRequest>> GetUserDetails();
 	}
 }
