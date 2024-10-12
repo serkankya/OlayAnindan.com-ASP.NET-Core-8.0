@@ -1,0 +1,39 @@
+﻿@using OA.EntityLayer.Requests.UserRequests
+@model ResultUserRequest
+
+@{
+    ViewData["Title"] = "GetUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>GetUser</h1>
+
+<div>
+	<label>@Model.UserId</label>
+	<br />
+	<label>@Model.RoleId</label>
+	<br />
+	<label>@Model.RoleName</label>
+	<br />
+	<label>@Model.Username</label>
+	<br />
+	<label>@Model.Email</label>
+	<br />
+	<label>@Model.Biography</label>
+	<br />
+	<label>@Model.FullName</label>
+	<br />
+	<label>@Model.ImageUrl</label>
+	<br />
+	<label>@Model.CreatedAt</label>
+	<br />
+	<label>@Model.UpdatedAt</label>
+	<br />
+	<label>@Model.Status</label>
+	<br />
+	<label>@Model.IsBlocked</label>
+	<br />
+	<label>@Model.LastLogin</label>
+	<br />
+</div>
+

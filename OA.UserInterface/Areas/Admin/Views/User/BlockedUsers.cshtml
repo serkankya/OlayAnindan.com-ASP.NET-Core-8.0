@@ -2,11 +2,11 @@
 @model List<ResultUserRequest>
 
 @{
-	ViewData["Title"] = "Manage";
-	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "BlockedUsers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Manage User</h1>
+<h1>BlockedUsers</h1>
 
 @foreach (var item in Model)
 {
@@ -42,5 +42,4 @@
 		<a href="/Admin/User/GetUser/@item.UserId" class="btn btn-sm btn-primary">Üyeyi Göster</a>
 	</div>
 }
-
 

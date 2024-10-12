@@ -32,5 +32,19 @@ namespace OA.WebAPI.Controllers
 			var values = await _userDal.GetUserDetails();
 			return Ok(values);
 		}
+
+		[HttpGet("GetBlockedUsers")]
+		public async Task<IActionResult> GetBlockedUsers()
+		{
+			var values = await _userDal.GetBlockedUsers();
+			return Ok(values);
+		}
+
+		[HttpGet("GetUser/{id}")]
+		public async Task<IActionResult> GetUserById(int id)
+		{
+			var values = await _userDal.GetUserById(id);
+			return Ok(values);
+		}
 	}
 }

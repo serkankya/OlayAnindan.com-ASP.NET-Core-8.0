@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OA.EntityLayer.Requests.UserRequests;
 using OA.UserInterface.Models;
+using System.Text;
 
 namespace OA.UserInterface.Areas.Admin.Controllers
 {
@@ -22,13 +23,68 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 		{
 			var client = _httpClientFactory.CreateClient();
 			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
-			var response = await client.GetAsync("User/GetUserDetails"); 
+			var response = await client.GetAsync("User/GetUserDetails");
 
 			if (response.IsSuccessStatusCode)
 			{
 				var jsonData = await response.Content.ReadAsStringAsync();
 				var values = JsonConvert.DeserializeObject<List<ResultUserRequest>>(jsonData);
 
+				return View(values);
+			}
+
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult InsertUser()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> InsertUser(InsertUserRequest insertUserRequest)
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var jsonData = JsonConvert.SerializeObject(insertUserRequest);
+			StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+			var response = await client.PostAsync("User/Insert", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				return RedirectToAction("Manage", "User");
+			}
+
+			return View();
+		}
+
+		public async Task<IActionResult> BlockedUsers()
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var response = await client.GetAsync("User/GetBlockedUsers");
+
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonData = await response.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultUserRequest>>(jsonData);
+				return View(values);
+			}
+
+			return View();
+		}
+
+		public async Task<IActionResult> GetUser(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var response = await client.GetAsync("User/GetUser/" + id);
+
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonData = await response.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<ResultUserRequest>(jsonData);
 				return View(values);
 			}
 

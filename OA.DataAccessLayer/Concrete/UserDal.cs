@@ -31,5 +31,40 @@ namespace OA.DataAccessLayer.Concrete
 				return values.ToList();
 			}
 		}
+
+		public async Task<List<ResultUserRequest>> GetBlockedUsers()
+		{
+			using (var connection  = _dapperContext.GetConnection())
+			{
+				string getBlockedQuery = "SELECT u.*, r.RoleName FROM Users u INNER JOIN Roles r ON u.RoleId = r.RoleId WHERE u.IsBlocked = 1";
+
+				var values = await connection.QueryAsync<ResultUserRequest>(getBlockedQuery);
+				return values.ToList();
+			}
+		}
+
+		public async Task<ResultUserRequest> GetUserById(int id)
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string getUserQuery = "SELECT u.*, r.RoleName FROM Users u INNER JOIN Roles r ON u.RoleId = r.RoleId WHERE UserId = @userId";
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@userId", id);
+
+				var value = await connection.QueryFirstOrDefaultAsync<ResultUserRequest>(getUserQuery,parameters);
+
+				if(value == null)
+				{
+					return new ResultUserRequest
+					{
+						UserId = 0,
+						Username = "User not found."
+					};
+				}
+
+				return value;
+			}
+		}
 	}
 }

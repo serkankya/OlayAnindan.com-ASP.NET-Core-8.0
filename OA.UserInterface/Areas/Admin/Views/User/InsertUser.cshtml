@@ -1,0 +1,37 @@
+﻿@{
+	ViewData["Title"] = "InsertUser";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>InsertUser</h1>
+
+<div>
+	<form asp-action="InsertUser" asp-controller="User" asp-area="Admin" method="post">
+
+		<label>Role :</label>
+		<input type="text" name="RoleId" />
+		<br />
+		<label>Kullanıcı adı</label>
+		<input type="text" name="Username" />
+		<br />
+		<label>Şifre</label>
+		<input type="password" name="PasswordHash" />
+		<br />
+		<label>Email</label>
+		<input type="email" name="Email" />
+		<br />
+		<label>Biyografi</label>
+		<input type="text" name="Biography" />
+		<br />
+		<label>İsim/Soyisim</label>
+		<input type="text" name="FullName" />
+		<br />
+		<label>Resim</label>
+		<input type="file" name="ImageUrl" />
+
+		<br />
+
+		<input type="submit" class="btn btn-primary" value="Kullanıcıyı ekle"/>
+
+	</form>
+</div>
