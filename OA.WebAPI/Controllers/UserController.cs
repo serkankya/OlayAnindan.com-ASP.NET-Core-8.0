@@ -60,7 +60,7 @@ namespace OA.WebAPI.Controllers
 			return BadRequest("An error occured while blocking the user.");
 		}
 
-		[HttpPut("Unblock/{id}")]
+		[HttpPut("UnblockUser/{id}")]
 		public async Task<IActionResult> UnblockUser(int id)
 		{
 			bool isBlocked = await _userDal.UnblockUser(id);

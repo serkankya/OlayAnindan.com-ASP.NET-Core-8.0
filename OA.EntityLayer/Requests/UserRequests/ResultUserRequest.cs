@@ -10,10 +10,10 @@
         public string? Biography { get; set; }
         public string? FullName { get; set; }
         public string? ImageUrl { get; set; }
-        public string? CreatedAt { get; set; }
-        public string? UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         public bool? Status { get; set; }
         public bool? IsBlocked { get; set; }
-        public string? LastLogin { get; set; }
+        public DateTime? LastLogin { get; set; }
     }
 }

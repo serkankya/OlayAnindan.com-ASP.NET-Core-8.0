@@ -6,50 +6,58 @@
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Manage User</h1>
-
-@foreach (var item in Model)
-{
-	<br />
-	<h6>***********</h6>
-	<div>
-		<label>@item.UserId</label>
-		<br />
-		<label>@item.RoleId</label>
-		<br />
-		<label>@item.RoleName</label>
-		<br />
-		<label>@item.Username</label>
-		<br />
-		<label>@item.Email</label>
-		<br />
-		<label>@item.Biography</label>
-		<br />
-		<label>@item.FullName</label>
-		<br />
-		<label>@item.ImageUrl</label>
-		<br />
-		<label>@item.CreatedAt</label>
-		<br />
-		<label>@item.UpdatedAt</label>
-		<br />
-		<label>@item.Status</label>
-		<br />
-		<label>@item.IsBlocked</label>
-		<br />
-		<label>@item.LastLogin</label>
-		<br />
-		<a href="/Admin/User/GetUser/@item.UserId" class="btn btn-sm btn-primary">Üyeyi Göster</a>
-		<br />
-		@if(item.IsBlocked == false)
-		{
-			<a href="/Admin/User/BlockUser/@item.UserId" class="btn btn-sm btn-danger">Üyeyi Engelle</a>
-		}
-		else
-		{
-			<a href="/Admin/User/UnblockUser/@item.UserId" class="btn btn-sm btn-danger">Engeli Kaldır</a>
-		}
+<div class="container comment-page">
+	<h3 class="text-center mb-4">Kullanıcı Yönetimi</h3>
+	<div class="col-12">
+		<div class="bg-light rounded h-100 p-4">
+			<h6 class="mb-4">Kullanıcılar</h6>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Rol</th>
+							<th scope="col">Kullanıcı Adı</th>
+							<th scope="col">Tam Adı</th>
+							<th scope="col">Email</th>
+							<th scope="col">Kayıt Tarihi</th>
+							<th scope="col">Son Giriş</th>
+							<th scope="col">Hesap Durumu</th>
+							<th scope="col">Engel Durumu</th>
+							<th scope="col">Hesap Detayları</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.RoleName</td>
+								<td>@item.Username</td>
+								<td>@item.FullName</td>
+								<td>@item.Email</td>
+								<td>@item.CreatedAt</td>
+								<td>@item.LastLogin</td>
+								@if (item.Status == true)
+								{
+									<td>Hesap Aktif</td>
+								}
+								else
+								{
+									<td style="background-color:brown">Hesap Pasif</td>
+								}
+								@if (item.IsBlocked == true)
+								{
+									<td style="background-color:orangered">Hesap Engellendi</td>
+								}
+								else
+								{
+									<td style="background-color:greenyellow">Hesap Olumlu</td>
+								}
+								<td><a class="btn btn-primary" href="/Admin/User/GetUser/@item.UserId">Detaylar</a></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-}
-
-
+</div>

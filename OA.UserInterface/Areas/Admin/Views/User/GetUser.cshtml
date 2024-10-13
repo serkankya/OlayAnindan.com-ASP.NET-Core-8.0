@@ -2,46 +2,109 @@
 @model ResultUserRequest
 
 @{
-    ViewData["Title"] = "GetUser";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Kullanıcı Bilgileri";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>GetUser</h1>
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<div class="card shadow-lg">
 
-<div>
-	<label>@Model.UserId</label>
-	<br />
-	<label>@Model.RoleId</label>
-	<br />
-	<label>@Model.RoleName</label>
-	<br />
-	<label>@Model.Username</label>
-	<br />
-	<label>@Model.Email</label>
-	<br />
-	<label>@Model.Biography</label>
-	<br />
-	<label>@Model.FullName</label>
-	<br />
-	<label>@Model.ImageUrl</label>
-	<br />
-	<label>@Model.CreatedAt</label>
-	<br />
-	<label>@Model.UpdatedAt</label>
-	<br />
-	<label>@Model.Status</label>
-	<br />
-	<label>@Model.IsBlocked</label>
-	<br />
-	<label>@Model.LastLogin</label>
-	<br />
-	@if (Model.IsBlocked == false)
-	{
-		<a href="/Admin/User/BlockUser/@Model.UserId" class="btn btn-sm btn-danger">Üyeyi Engelle</a>
-	}
-	else
-	{
-		<a href="/Admin/User/Unblock/@Model.UserId" class="btn btn-sm btn-danger">Engeli Kaldır</a>
-	}
+				<div class="card-header bg-primary text-white text-center">
+					<img src="@Url.Content(Model.ImageUrl)" alt="Kullanıcı Resmi" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+					<h3 class="mt-3 mb-0">@Model.FullName</h3>
+					<p class="mb-0">@Model.Username</p>
+				</div>
+
+				<div class="card-body">
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Kullanıcı ID:</div>
+						<div class="col-md-8">@Model.UserId</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Rol ID:</div>
+						<div class="col-md-8">@Model.RoleId</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Rol Adı:</div>
+						<div class="col-md-8">@Model.RoleName</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">E-posta:</div>
+						<div class="col-md-8">@Model.Email</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Biyografi:</div>
+						<div class="col-md-8">@Model.Biography</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Kayıt Tarihi:</div>
+						<div class="col-md-8">@Model.CreatedAt</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Güncelleme Tarihi:</div>
+						<div class="col-md-8">
+							@if (Model.UpdatedAt.HasValue)
+							{
+								if (Model.UpdatedAt.Value.Year < 2023)
+								{
+									<span>Hesap henüz güncellenmedi.</span>
+								}
+								else
+								{
+									@Model.UpdatedAt;
+								}
+							}
+							else
+							{
+								<span>Hesap henüz güncellenmedi.</span>
+							}
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Durum:</div>
+						<div class="col-md-8">
+							@if (@Model.Status == true)
+							{
+								<span class="badge bg-success">Aktif</span>
+							}
+							else
+							{
+								<span class="badge bg-danger">Pasif</span>
+							}
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Engellenme Durumu:</div>
+						<div class="col-md-8">
+							@if (@Model.IsBlocked == false)
+							{
+								<span class="badge bg-success">Engelsiz</span>
+							}
+							else
+							{
+								<span class="badge bg-danger">Engelli</span>
+							}
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-4 font-weight-bold">Son Giriş:</div>
+						<div class="col-md-8">@Model.LastLogin</div>
+					</div>
+
+					<div class="text-center mt-4">
+						@if (Model.IsBlocked == false)
+						{
+							<a href="/Admin/User/BlockUser/@Model.UserId" class="btn btn-danger">Kullanıcıyı Engelle</a>
+						}
+						else
+						{
+							<a href="/Admin/User/UnblockUser/@Model.UserId" class="btn btn-success">Engeli Kaldır</a>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-

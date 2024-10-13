@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using OA.EntityLayer.Requests.RoleRequests;
 using OA.EntityLayer.Requests.UserRequests;
 using OA.UserInterface.Models;
 using System.Text;
@@ -37,8 +38,9 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult InsertUser()
+		public async Task<IActionResult> InsertUser()
 		{
+			await GetActiveRoles();
 			return View();
 		}
 
@@ -56,7 +58,8 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 				return RedirectToAction("Manage", "User");
 			}
 
-			return View();
+			await GetActiveRoles();
+			return View(insertUserRequest);
 		}
 
 		public async Task<IActionResult> BlockedUsers()
@@ -118,6 +121,23 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 			if (response.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Manage", "User");
+			}
+
+			return View();
+		}
+
+		public async Task<IActionResult> GetActiveRoles()
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var response = await client.GetAsync("Role/GetActives");
+
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonData = await response.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultRoleRequest>>(jsonData);
+
+				ViewBag.Roles = values;
 			}
 
 			return View();
