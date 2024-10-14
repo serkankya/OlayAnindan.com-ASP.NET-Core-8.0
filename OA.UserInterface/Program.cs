@@ -38,7 +38,12 @@ namespace OA.UserInterface
 			pattern: "Admin/{controller=Dashboard}/{action=Dashboard}/{id?}",
 			defaults: new { area = "Admin" });
 
-			app.Run();
+            app.MapControllerRoute(
+            name: "user",
+            pattern: "User/{controller=Home}/{action=Index}",
+            defaults: new { area = "User" });
+
+            app.Run();
 		}
 	}
 }

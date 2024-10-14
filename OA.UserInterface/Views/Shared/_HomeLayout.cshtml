@@ -1,0 +1,366 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>OlayAnindan.com</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta name="keywords">
+	<meta name="description">
+
+	<link href="~/news/img/favicon.ico" rel="icon">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+	<link href="~/news/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+	<link href="~/news/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid d-none d-lg-block">
+		<div class="row align-items-center bg-dark px-lg-5">
+			<div class="col-lg-9">
+				<nav class="navbar navbar-expand-sm bg-dark p-0">
+					<ul class="navbar-nav ml-n2">
+						<li class="nav-item border-right border-secondary">
+							<a class="nav-link text-body small">@DateTime.Now.ToString("dddd, MMMM d, yyyy")</a>
+						</li>
+
+						<li class="nav-item border-right border-secondary">
+							<a class="nav-link text-body small" href="#">Reklam</a>
+						</li>
+						<li class="nav-item border-right border-secondary">
+							<a class="nav-link text-body small" href="#">İletişim</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body small" href="#">Giriş Yap</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-lg-3 text-right d-none d-md-block">
+				<nav class="navbar navbar-expand-sm bg-dark p-0">
+					<ul class="navbar-nav ml-auto mr-n2">
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-twitter"></small></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-facebook-f"></small></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-linkedin-in"></small></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-instagram"></small></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-google-plus-g"></small></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-body" href="#"><small class="fab fa-youtube"></small></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<div class="row align-items-center bg-white py-3 px-lg-5">
+			<div class="col-lg-4">
+				<a href="#" class="navbar-brand p-0 d-none d-lg-block">
+					<h1 class="m-0 display-4 text-uppercase text-primary">Olay<span class="text-secondary font-weight-normal">Anından</span></h1>
+				</a>
+			</div>
+			<div class="col-lg-8 text-center text-lg-right">
+				<a href="https://htmlcodex.com"><img class="img-fluid" src="~/news/img/ads-728x90.png" alt=""></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid p-0">
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+			<a href="#" class="navbar-brand d-block d-lg-none">
+				<h1 class="m-0 display-4 text-uppercase text-primary">Olay<span class="text-white font-weight-normal">Anından</span></h1>
+			</a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+				<div class="navbar-nav mr-auto py-0">
+					<a href="#" class="nav-item nav-link active">Ana Sayfa</a>
+					<a href="#" class="nav-item nav-link">Kategoriler</a>
+					<a href="#" class="nav-item nav-link">Tekil Haber</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Menü</a>
+						<div class="dropdown-menu rounded-0 m-0">
+							<a href="#" class="dropdown-item">Menu 1</a>
+							<a href="#" class="dropdown-item">Menu 2</a>
+							<a href="#" class="dropdown-item">Menu 3</a>
+						</div>
+					</div>
+					<a href="#" class="nav-item nav-link">İletişim</a>
+				</div>
+				<div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+					<input type="text" class="form-control border-0" placeholder="Keyword">
+					<div class="input-group-append">
+						<button class="input-group-text bg-primary text-dark border-0 px-3">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	@RenderBody()
+
+	<div class="col-lg-4">
+		<div class="mb-3">
+			<div class="section-title mb-0">
+				<h4 class="m-0 text-uppercase font-weight-bold">Bizi Takip Edin</h4>
+			</div>
+			<div class="bg-white border border-top-0 p-3">
+				<a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #39569E;">
+					<i class="fab fa-facebook-f text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Takipçi</span>
+				</a>
+				<a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #52AAF4;">
+					<i class="fab fa-twitter text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Takipçi</span>
+				</a>
+				<a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #0185AE;">
+					<i class="fab fa-linkedin-in text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Bağlantı</span>
+				</a>
+				<a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #C8359D;">
+					<i class="fab fa-instagram text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Takipçi</span>
+				</a>
+				<a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #DC472E;">
+					<i class="fab fa-youtube text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Abone</span>
+				</a>
+				<a href="" class="d-block w-100 text-white text-decoration-none" style="background: #055570;">
+					<i class="fab fa-vimeo-v text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+					<span class="font-weight-medium">12,345 Takipçi</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<div class="section-title mb-0">
+				<h4 class="m-0 text-uppercase font-weight-bold">Reklamlar</h4>
+			</div>
+			<div class="bg-white text-center border border-top-0 p-3">
+				<a href="#"><img class="img-fluid" src="~/news/img/news-800x500-2.jpg" alt=""></a>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<div class="section-title mb-0">
+				<h4 class="m-0 text-uppercase font-weight-bold">Trend Haberler</h4>
+			</div>
+			<div class="bg-white border border-top-0 p-3">
+				<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+					<img class="img-fluid" src="~/news/img/news-110x110-1.jpg" alt="">
+					<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Başlık</a>
+							<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+						</div>
+						<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+					</div>
+				</div>
+				<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+					<img class="img-fluid" src="~/news/img/news-110x110-2.jpg" alt="">
+					<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Başlık</a>
+							<a class="text-body" href="#"><small>Jan 01, 2045</small></a>
+						</div>
+						<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+					</div>
+				</div>
+				<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+					<img class="img-fluid" src="~/news/img/news-110x110-3.jpg" alt="">
+					<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Başlık</a>
+							<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+						</div>
+						<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+					</div>
+				</div>
+				<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+					<img class="img-fluid" src="~/news/img/news-110x110-4.jpg" alt="">
+					<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Başlık</a>
+							<a class="text-body" href="#"><small>Jan 01, 2045</small></a>
+						</div>
+						<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+					</div>
+				</div>
+				<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+					<img class="img-fluid" src="~/news/img/news-110x110-5.jpg" alt="">
+					<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Başlık</a>
+							<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+						</div>
+						<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum dolor sit amet elit...</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<div class="section-title mb-0">
+				<h4 class="m-0 text-uppercase font-weight-bold">Newsletter</h4>
+			</div>
+			<div class="bg-white text-center border border-top-0 p-3">
+				<p>Aliqu justo et labore at eirmod justo sea erat diam dolor diam vero kasd</p>
+				<div class="input-group mb-2" style="width: 100%;">
+					<input type="text" class="form-control form-control-lg" placeholder="E-mail Adresiniz">
+					<div class="input-group-append">
+						<button class="btn btn-primary font-weight-bold px-3">Kayıt Ol</button>
+					</div>
+				</div>
+				<small>Lorem ipsum dolor sit amet elit</small>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<div class="section-title mb-0">
+				<h4 class="m-0 text-uppercase font-weight-bold">Etiketler</h4>
+			</div>
+			<div class="bg-white border border-top-0 p-3">
+				<div class="d-flex flex-wrap m-n1">
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Siyaset</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">İşletme</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Girişim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Magazin</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5">
+		<div class="row py-4">
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="mb-4 text-white text-uppercase font-weight-bold">Bize Ulaşın</h5>
+				<p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+				<p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+				<p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+				<h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Bizi Takip Edin</h6>
+				<div class="d-flex justify-content-start">
+					<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+					<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+					<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+					<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
+					<a class="btn btn-lg btn-secondary btn-lg-square" href="#"><i class="fab fa-youtube"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="mb-4 text-white text-uppercase font-weight-bold">Trendler</h5>
+				<div class="mb-3">
+					<div class="mb-2">
+						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
+						<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+					</div>
+					<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
+				</div>
+				<div class="mb-3">
+					<div class="mb-2">
+						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
+						<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+					</div>
+					<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
+				</div>
+				<div class="">
+					<div class="mb-2">
+						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
+						<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+					</div>
+					<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="mb-4 text-white text-uppercase font-weight-bold">Categories</h5>
+				<div class="m-n1">
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Siyaset</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">İşletme</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Girişim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Magazin</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="mb-4 text-white text-uppercase font-weight-bold">Görseller</h5>
+				<div class="row">
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-1.jpg" alt=""></a>
+					</div>
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-2.jpg" alt=""></a>
+					</div>
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-3.jpg" alt=""></a>
+					</div>
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-4.jpg" alt=""></a>
+					</div>
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-5.jpg" alt=""></a>
+					</div>
+					<div class="col-4 mb-3">
+						<a href=""><img class="w-100" src="~/news/img/news-110x110-1.jpg" alt=""></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
+		<p class="m-0 text-center">
+			&copy; <a href="#">OlayAnindan.com</a> Bütün Hakları Saklıdır.
+
+			Detaylar için <a href="https://olayanindan.com">OA</a>
+		</p>
+	</div>
+
+	<a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="~/news/lib/easing/easing.min.js"></script>
+	<script src="~/news/lib/owlcarousel/owl.carousel.min.js"></script>
+
+	<script src="~/news/js/main.js"></script>
+</body>
+
+</html>
+

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\uploads\**" />
+    <Content Remove="wwwroot\uploads\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\**" />
+    <None Remove="wwwroot\uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
   </ItemGroup>
 
@@ -15,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\User\ViewComponents\" />
     <Folder Include="Controllers\" />
-    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 </Project>
