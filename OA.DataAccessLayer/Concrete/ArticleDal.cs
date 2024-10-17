@@ -26,9 +26,20 @@ namespace OA.DataAccessLayer.Concrete
 		{
 			using (var connection = _dapperContext.GetConnection())
 			{
-				string queryForFeatureds = "SELECT * FROM Articles WHERE IsFeatured = 1";
+				string queryForFeatureds = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.IsFeatured = 1";
 
 				var values = await connection.QueryAsync<ResultArticleRequest>(queryForFeatureds);
+				return values.ToList();
+			}
+		}
+
+		public async Task<List<ResultArticleRequest>> GetLatestNews()
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string queryForLatestNews = "SELECT TOP(12)* FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId ORDER BY a.CreatedAt DESC";
+
+				var values = await connection.QueryAsync<ResultArticleRequest>(queryForLatestNews);
 				return values.ToList();
 			}
 		}
@@ -37,7 +48,7 @@ namespace OA.DataAccessLayer.Concrete
 		{
 			using (var connection = _dapperContext.GetConnection())
 			{
-				string queryForMainNews = "SELECT * FROM Articles WHERE IsMainNews = 1";
+				string queryForMainNews = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.IsMainNews = 1";
 
 				var values = await connection.QueryAsync<ResultArticleRequest>(queryForMainNews);
 				return values.ToList();

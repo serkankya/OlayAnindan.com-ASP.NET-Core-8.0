@@ -11,5 +11,6 @@ namespace OA.BusinessLayer.Abstract
 		Task<bool> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest);
 		Task<List<ResultArticleRequest>> GetMainNewsHighlights();
 		Task<List<ResultArticleRequest>> GetFeaturedNews();
+		Task<List<ResultArticleRequest>> GetLatestNews();
 	}
 }

@@ -59,5 +59,12 @@ namespace OA.WebAPI.Controllers
 			var values = await _articleDal.GetMainNewsHighlights();
 			return Ok(values);
 		}
+
+		[HttpGet("GetLatestNews")]
+		public async Task<IActionResult> GetLatestNews()
+		{
+			var values = await _articleDal.GetLatestNews();
+			return Ok(values);
+		}
 	}
 }

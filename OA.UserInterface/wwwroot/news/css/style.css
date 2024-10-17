@@ -7168,6 +7168,22 @@ button.bg-dark:focus {
   overflow: auto !important;
 }
 
+.text-multiline-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-line-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .overflow-hidden {
   overflow: hidden !important;
 }
