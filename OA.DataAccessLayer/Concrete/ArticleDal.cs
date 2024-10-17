@@ -22,6 +22,28 @@ namespace OA.DataAccessLayer.Concrete
 			_logger = logger;
 		}
 
+		public async Task<List<ResultArticleRequest>> GetFeaturedNews()
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string queryForFeatureds = "SELECT * FROM Articles WHERE IsFeatured = 1";
+
+				var values = await connection.QueryAsync<ResultArticleRequest>(queryForFeatureds);
+				return values.ToList();
+			}
+		}
+
+		public async Task<List<ResultArticleRequest>> GetMainNewsHighlights()
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string queryForMainNews = "SELECT * FROM Articles WHERE IsMainNews = 1";
+
+				var values = await connection.QueryAsync<ResultArticleRequest>(queryForMainNews);
+				return values.ToList();
+			}
+		}
+
 		public async Task<ResultArticleRequest> GetResultArticleById(int articleId)
 		{
 			using (var connection = _dapperContext.GetConnection())

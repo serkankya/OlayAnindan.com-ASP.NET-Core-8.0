@@ -30,6 +30,8 @@ namespace OA.EntityLayer.Concrete
 
         [Column("ViewCount")]
         public int ViewCount { get; set; }
+        [Column("IsMainNews")]
+        public bool IsMainNews { get; set; }
 
         [Column("IsFeatured")]
         public bool IsFeatured { get; set; }

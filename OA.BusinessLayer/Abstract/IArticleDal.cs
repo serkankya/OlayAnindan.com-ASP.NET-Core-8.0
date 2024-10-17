@@ -9,5 +9,7 @@ namespace OA.BusinessLayer.Abstract
 		Task<List<ResultArticleRequest>> GetResultArticles();
 		Task<ResultArticleRequest> GetResultArticleById(int articleId);
 		Task<bool> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest);
+		Task<List<ResultArticleRequest>> GetMainNewsHighlights();
+		Task<List<ResultArticleRequest>> GetFeaturedNews();
 	}
 }

@@ -45,5 +45,19 @@ namespace OA.WebAPI.Controllers
 			}
 			return Ok("Entity inserted successfully.");
 		}
+
+		[HttpGet("GetFeaturedNews")]
+		public async Task<IActionResult> GetFeaturedNews()
+		{
+			var values = await _articleDal.GetFeaturedNews();
+			return Ok(values);
+		}
+
+		[HttpGet("GetMainNews")]
+		public async Task<IActionResult> GetMainNews()
+		{
+			var values = await _articleDal.GetMainNewsHighlights();
+			return Ok(values);
+		}
 	}
 }

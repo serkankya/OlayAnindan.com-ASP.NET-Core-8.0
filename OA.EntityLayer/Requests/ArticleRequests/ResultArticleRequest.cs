@@ -19,6 +19,7 @@ namespace OA.EntityLayer.Requests.ArticleRequests
 		public string? Summary { get; set; }
 		public DateTime PublishedAt { get; set; }
 		public int ViewCount { get; set; }
+		public bool IsMainNews { get; set; }
 		public bool IsFeatured { get; set; }
 		public string? MainMediaPath { get; set; }
 		public string? MainMediaType { get; set; }
