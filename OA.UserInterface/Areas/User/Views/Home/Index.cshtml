@@ -1,7 +1,14 @@
-﻿
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model List<ResultArticleRequest>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h2>News will be here</h2>
+<div class="container-fluid">
+    <div class="row">
+        @await Component.InvokeAsync("_HomeGetMainNewsComponentPartial")
+        @await Component.InvokeAsync("_HomeGetFeaturedNewsComponentPartial")
+    </div>
+</div>

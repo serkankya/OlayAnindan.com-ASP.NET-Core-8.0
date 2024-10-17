@@ -1,0 +1,21 @@
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model List<ResultArticleRequest>
+
+<div class="col-lg-7 px-0">
+    <div class="owl-carousel main-carousel position-relative">
+        @foreach (var item in Model)
+        {
+            <div class="position-relative overflow-hidden" style="height: 500px;">
+                <img class="img-fluid h-100" src="~/news/img/news-800x500-1.jpg" style="object-fit: cover;">
+                <div class="overlay">
+                    <div class="mb-2">
+                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                           href="">@item.CategoryName</a>
+                        <a class="text-white" href="">@item.CreatedAt</a>
+                    </div>
+                    <a class="h2 m-0 text-white text-uppercase font-weight-bold" href="#">@item.ArticleId - @item.Title</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
