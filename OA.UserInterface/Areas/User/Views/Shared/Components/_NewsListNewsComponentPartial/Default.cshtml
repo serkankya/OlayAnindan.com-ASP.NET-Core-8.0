@@ -1,0 +1,29 @@
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model List<ResultArticleRequest>
+
+<div class="row">
+	@foreach (var item in Model)
+	{
+		<div class="col-lg-6">
+			<div class="position-relative mb-3">
+				<img class="img-fluid w-100" src="@Url.Content(item.MainMediaPath)" style="object-fit: cover;">
+				<div class="bg-white border border-top-0 p-4">
+					<div class="mb-2">
+						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+						   href="">@item.CategoryName</a>
+						<a class="text-body" href=""><small>@item.CreatedAt.ToString("dd MMMM yyyy")</small></a>
+						<small class="ml-3"><i class="far fa-eye mr-2"></i>@item.ViewCount</small>
+					</div>
+					<a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold text-multiline-truncate" href="#">
+						@item.Title
+					</a>
+					<p class="m-0 text-line-truncate">
+						@item.ContentText
+					</p>
+				</div>
+
+			</div>
+		</div>
+	}
+</div>
+

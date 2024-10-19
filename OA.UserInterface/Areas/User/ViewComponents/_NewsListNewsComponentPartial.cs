@@ -6,22 +6,23 @@ using OA.UserInterface.Models;
 
 namespace OA.UserInterface.Areas.User.ViewComponents
 {
-    public class _HomeGetFeaturedNewsComponentPartial : ViewComponent
+    public class _NewsListNewsComponentPartial : ViewComponent
     {
         readonly IHttpClientFactory _httpClientFactory;
         readonly ApiSettings _apiSettings;
 
-        public _HomeGetFeaturedNewsComponentPartial(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
+        public _NewsListNewsComponentPartial(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings)
         {
             _httpClientFactory = httpClientFactory;
             _apiSettings = apiSettings.Value;
         }
 
+        [HttpGet]
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
-            var response = await client.GetAsync("Article/GetFeaturedNews");
+            var response = await client.GetAsync("Article/GetResultArticles");
 
             if (response.IsSuccessStatusCode)
             {
@@ -32,5 +33,11 @@ namespace OA.UserInterface.Areas.User.ViewComponents
 
             return View();
         }
+
+        //[HttpPost]
+        //public async Task<IViewComponentResult> InvokeAsync(int categoryId, bool dateOption)
+        //{
+
+        //}
     }
 }

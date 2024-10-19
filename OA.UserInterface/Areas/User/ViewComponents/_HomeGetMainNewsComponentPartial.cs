@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OA.EntityLayer.Requests.ArticleRequests;
 using OA.UserInterface.Models;
-using System.Net.Http;
 
 namespace OA.UserInterface.Areas.User.ViewComponents
 {

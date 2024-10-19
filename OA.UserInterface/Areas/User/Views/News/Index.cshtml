@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="col-lg-8">
+    <div class="row mb-4">
+        <div class="col-12">
+            <form method="post">
+                <div class="form-group">
+                    <label for="category">Kategori Seç</label>
+                    <select class="form-control" id="category" name="category">
+                        <option value="">Tüm Kategoriler</option>
+                        <option value="Kategori1">Kategori1</option>
+                        <option value="Kategori2">Kategori2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Tarihe Göre Sırala</label>
+                    <select class="form-control" id="date" name="date">
+                        <option value="desc">En Yeni</option>
+                        <option value="asc">En Eski</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrele</button>
+            </form>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_NewsListNewsComponentPartial")
+
+    </div>
+
