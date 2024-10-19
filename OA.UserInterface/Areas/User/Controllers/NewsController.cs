@@ -7,7 +7,19 @@ namespace OA.UserInterface.Areas.User.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.CategoryId = TempData["CategoryId"];
+            ViewBag.DateOpt = TempData["DateOpt"];
+            
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult FilterNews(int categoryId, bool dateOpt)
+        {
+            TempData["CategoryId"] = categoryId;
+            TempData["DateOpt"] = dateOpt;
+
+            return RedirectToAction("Index","News", new {area="User"});
         }
     }
 }

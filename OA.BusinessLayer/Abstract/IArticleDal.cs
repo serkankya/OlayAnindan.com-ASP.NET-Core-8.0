@@ -12,5 +12,6 @@ namespace OA.BusinessLayer.Abstract
 		Task<List<ResultArticleRequest>> GetMainNewsHighlights();
 		Task<List<ResultArticleRequest>> GetFeaturedNews();
 		Task<List<ResultArticleRequest>> GetLatestNews();
+		Task<List<ResultArticleRequest>> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption);
 	}
 }

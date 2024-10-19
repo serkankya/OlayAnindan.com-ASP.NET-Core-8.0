@@ -8,63 +8,71 @@ using OA.EntityLayer.Requests.TagRequests;
 
 namespace OA.WebAPI.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class ArticleController : GenericApiController<Article, InsertArticleRequest, UpdateArticleRequest>
-	{
-		readonly IArticleDal _articleDal;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ArticleController : GenericApiController<Article, InsertArticleRequest, UpdateArticleRequest>
+    {
+        readonly IArticleDal _articleDal;
 
-		public ArticleController(IGenericRepository<Article, InsertArticleRequest, UpdateArticleRequest> repository, IArticleDal articleDal)
-			: base(repository)
-		{
-			_articleDal = articleDal;
-		}
+        public ArticleController(IGenericRepository<Article, InsertArticleRequest, UpdateArticleRequest> repository, IArticleDal articleDal)
+            : base(repository)
+        {
+            _articleDal = articleDal;
+        }
 
-		[HttpGet("GetResultArticles")]
-		public async Task<IActionResult> GetResultArticles()
-		{
-			var values = await _articleDal.GetResultArticles();
-			return Ok(values);
-		}
+        [HttpGet("GetResultArticles")]
+        public async Task<IActionResult> GetResultArticles()
+        {
+            var values = await _articleDal.GetResultArticles();
+            return Ok(values);
+        }
 
-		[HttpGet("GetResultArticle/{id}")]
-		public async Task<IActionResult> GetResultArticleById(int id)
-		{
-			var value = await _articleDal.GetResultArticleById(id);
-			return Ok(value);
-		}
+        [HttpGet("GetResultArticle/{id}")]
+        public async Task<IActionResult> GetResultArticleById(int id)
+        {
+            var value = await _articleDal.GetResultArticleById(id);
+            return Ok(value);
+        }
 
-		[HttpPost("InsertTransaction")]
-		public async Task<IActionResult> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)
-		{
-			bool isInserted = await _articleDal.InsertTransaction(insertArticleTransactionRequest);
+        [HttpPost("InsertTransaction")]
+        public async Task<IActionResult> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)
+        {
+            bool isInserted = await _articleDal.InsertTransaction(insertArticleTransactionRequest);
 
-			if (!isInserted)
-			{
-				return BadRequest("Insert failed.");
-			}
-			return Ok("Entity inserted successfully.");
-		}
+            if (!isInserted)
+            {
+                return BadRequest("Insert failed.");
+            }
+            return Ok("Entity inserted successfully.");
+        }
 
-		[HttpGet("GetFeaturedNews")]
-		public async Task<IActionResult> GetFeaturedNews()
-		{
-			var values = await _articleDal.GetFeaturedNews();
-			return Ok(values);
-		}
+        [HttpGet("GetFeaturedNews")]
+        public async Task<IActionResult> GetFeaturedNews()
+        {
+            var values = await _articleDal.GetFeaturedNews();
+            return Ok(values);
+        }
 
-		[HttpGet("GetMainNews")]
-		public async Task<IActionResult> GetMainNews()
-		{
-			var values = await _articleDal.GetMainNewsHighlights();
-			return Ok(values);
-		}
+        [HttpGet("GetMainNews")]
+        public async Task<IActionResult> GetMainNews()
+        {
+            var values = await _articleDal.GetMainNewsHighlights();
+            return Ok(values);
+        }
 
-		[HttpGet("GetLatestNews")]
-		public async Task<IActionResult> GetLatestNews()
-		{
-			var values = await _articleDal.GetLatestNews();
-			return Ok(values);
-		}
-	}
+        [HttpGet("GetLatestNews")]
+        public async Task<IActionResult> GetLatestNews()
+        {
+            var values = await _articleDal.GetLatestNews();
+            return Ok(values);
+        }
+
+        [HttpGet("GetFilteredNewsByCategoryAndDate")]
+        public async Task<IActionResult> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption)
+        {
+            var values = await _articleDal.GetFilteredNewsByCategoryAndDate(categoryId, dateOption);
+            return Ok(values);
+        }
+
+    }
 }

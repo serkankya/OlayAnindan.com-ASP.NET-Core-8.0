@@ -1,0 +1,22 @@
+﻿<div class="row mb-4">
+    <div class="col-12">
+        <form action="/User/News/FilterNews" method="get">
+            <div class="form-group">
+                <label for="categoryId">Kategori Seç</label>
+                <select class="form-control" id="categoryId" name="categoryId">
+                    <option value="">Tüm Kategoriler</option>
+                    <option value="1">Kategori1</option>
+                    <option value="2">Kategori2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dateOpt">Tarihe Göre Sırala</label>
+                <select class="form-control" id="dateOpt" name="dateOpt">
+                    <option value="true">En Yeni</option>
+                    <option value="false">En Eski</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary py-3 px-5">Filtrele</button>
+        </form>
+    </div>
+</div>
