@@ -13,12 +13,12 @@ namespace OA.WebAPI.FluentValidation
             RuleFor(x=>x.CategoryId)
                 .GreaterThan(0);
 
-            RuleFor(x => x.Title)
+            RuleFor(x => x.MainTitle)
                 .NotEmpty().WithMessage("Title cannot be empty.")
                 .MinimumLength(10).WithMessage("Title must be at least 10 characters long.")
                 .MaximumLength(200).WithMessage("Title must be smaller than 200 characters long.");
 
-			RuleFor(x => x.ContentText)
+			RuleFor(x => x.MainText)
 				.NotEmpty().WithMessage("Content cannot be empty.")
 				.MinimumLength(50).WithMessage("Content must be at least 50 characters long.")
 				.MaximumLength(10000).WithMessage("Content must be smaller than 10000 characters long.");

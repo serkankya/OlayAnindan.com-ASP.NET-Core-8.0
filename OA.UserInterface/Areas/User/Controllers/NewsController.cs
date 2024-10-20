@@ -21,5 +21,12 @@ namespace OA.UserInterface.Areas.User.Controllers
 
             return RedirectToAction("Index","News", new {area="User"});
         }
-    }
+
+		[Route("/User/News/SingleNews/{articleId}")]
+		public IActionResult SingleNews(int articleId)
+		{
+			ViewBag.SelectedArticledId = articleId;
+			return View();
+		}
+	}
 }

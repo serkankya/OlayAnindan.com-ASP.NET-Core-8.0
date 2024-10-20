@@ -1,0 +1,17 @@
+﻿@{
+	ViewData["Title"] = "SingleNews";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<div class="col-lg-8 mt-5 mb-3 pt-3">
+
+	@await Component.InvokeAsync("_NewsSingleDetailsComponentPartial", new { articleId = ViewBag.SelectedArticledId })
+
+	@await Component.InvokeAsync("_NewsSingleCommentsComponentPartial")
+
+	@await Component.InvokeAsync("_NewsSingleCommentFormComponentPartial")
+
+</div>
+
+

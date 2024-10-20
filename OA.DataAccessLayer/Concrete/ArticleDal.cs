@@ -103,7 +103,7 @@ namespace OA.DataAccessLayer.Concrete
                     return new ResultArticleRequest
                     {
                         ArticleId = 0,
-                        Title = "Article not found or inactive!"
+                        MainTitle = "Article not found or inactive!"
                     };
                 }
 
@@ -135,13 +135,17 @@ namespace OA.DataAccessLayer.Concrete
                         try
                         {
                             #region Articles
-                            string queryForArticle = "INSERT INTO Articles (UserId, CategoryId, Title, ContentText, Summary, IsFeatured) VALUES (@userId, @categoryId, @title, @contentText, @summary, @isFeatured); SELECT SCOPE_IDENTITY();";
+                            string queryForArticle = "INSERT INTO Articles (UserId, CategoryId, MainTitle, MainText, FirstTitle, FirstText, SecondTitle, SecondText, Summary, IsFeatured) VALUES (@userId, @categoryId, @mainTitle, @mainText, @firstTitle, @firstText, @secondTitle, @secondText, @summary, @isFeatured); SELECT SCOPE_IDENTITY();";
 
                             var parametersForArticle = new DynamicParameters();
                             parametersForArticle.Add("@userId", insertArticleTransactionRequest.UserId);
                             parametersForArticle.Add("@categoryId", insertArticleTransactionRequest.CategoryId);
-                            parametersForArticle.Add("@title", insertArticleTransactionRequest.Title);
-                            parametersForArticle.Add("@contentText", insertArticleTransactionRequest.ContentText);
+                            parametersForArticle.Add("@mainTitle", insertArticleTransactionRequest.MainTitle);
+                            parametersForArticle.Add("@mainText", insertArticleTransactionRequest.MainText);
+                            parametersForArticle.Add("@firstTitle", insertArticleTransactionRequest.FirstTitle);
+                            parametersForArticle.Add("@firstText", insertArticleTransactionRequest.FirstText);
+                            parametersForArticle.Add("@secondTitle", insertArticleTransactionRequest.SecondTitle);
+                            parametersForArticle.Add("@secondText", insertArticleTransactionRequest.SecondText);
                             parametersForArticle.Add("@summary", insertArticleTransactionRequest.Summary);
                             parametersForArticle.Add("@isFeatured", insertArticleTransactionRequest.IsFeatured);
 

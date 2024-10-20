@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OA.EntityLayer.Concrete
 {
-	[Table("Articles")]
-	public class Article
-	{
+    [Table("Articles")]
+    public class Article
+    {
         [Key]
         [Column("ArticleId")]
         public int ArticleId { get; set; }
@@ -16,11 +16,23 @@ namespace OA.EntityLayer.Concrete
         [Column("CategoryId")]
         public int CategoryId { get; set; }
 
-        [Column("Title")]
-        public string? Title { get; set; }
+        [Column("MainTitle")]
+        public string? MainTitle { get; set; }
 
-        [Column("ContentText")]
-        public string? ContentText { get; set; }
+        [Column("MainText")]
+        public string? MainText { get; set; }
+
+        [Column("FirstTitle")]
+        public string? FirstTitle { get; set; }
+
+        [Column("FirstText")]
+        public string? FirstText { get; set; }
+
+        [Column("SecondTitle")]
+        public string? SecondTitle { get; set; }
+
+        [Column("SecondText")]
+        public string? SecondText { get; set; }
 
         [Column("Summary")]
         public string? Summary { get; set; }
