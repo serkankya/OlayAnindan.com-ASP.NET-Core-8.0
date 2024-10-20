@@ -42,9 +42,23 @@ namespace OA.DataAccessLayer.Concrete
 		{
 			using (var connection = _dapperContext.GetConnection())
 			{
-				string queryForComments = "SELECT c.CommentId, a.ArticleId, u.UserId, u.Username, a.Title, c.CommentText, c.CreatedDate, c.Status FROM Comments c INNER JOIN Users u ON c.UserId = u.UserId INNER JOIN Articles a ON a.ArticleId = c.ArticleId";
+				string queryForComments = "SELECT c.CommentId, a.ArticleId, u.UserId, u.Username, u.Email, u.FullName, a.MainTitle, c.CommentText, c.CreatedDate, c.Status FROM Comments c INNER JOIN Users u ON c.UserId = u.UserId INNER JOIN Articles a ON a.ArticleId = c.ArticleId";
 
 				var values = await connection.QueryAsync<ResultCommentRequest>(queryForComments);
+				return values.ToList();
+			}
+		}
+
+		public async Task<List<ResultCommentRequest>> GetResultCommentsById(int articleId)
+		{
+			using (var connection = _dapperContext.GetConnection())
+			{
+				string queryForComments = "SELECT c.CommentId, a.ArticleId, u.UserId, u.Username, u.Email, u.FullName, u.ImageUrl, a.MainTitle, c.CommentText, c.CreatedDate, c.Status FROM Comments c INNER JOIN Users u ON c.UserId = u.UserId INNER JOIN Articles a ON a.ArticleId = c.ArticleId WHERE c.ArticleId = @articleId";
+
+				var parameters = new DynamicParameters();
+				parameters.Add("@articleId", articleId);
+
+				var values = await connection.QueryAsync<ResultCommentRequest>(queryForComments, parameters);
 				return values.ToList();
 			}
 		}

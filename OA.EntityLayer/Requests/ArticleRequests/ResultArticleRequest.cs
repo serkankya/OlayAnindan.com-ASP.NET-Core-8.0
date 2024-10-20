@@ -12,6 +12,8 @@ namespace OA.EntityLayer.Requests.ArticleRequests
         public int UserId { get; set; }
         public int MediaId { get; set; }
         public string? Username { get; set; }
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
         public int CategoryId { get; set; }
         public string? CategoryName { get; set; }
         public string? MainTitle { get; set; }
@@ -31,6 +33,7 @@ namespace OA.EntityLayer.Requests.ArticleRequests
         public string? FirstMediaType { get; set; }
         public string? SecondMediaPath { get; set; }
         public string? SecondMediaType { get; set; }
+        public string? ImageUrl { get; set; } //User
         public List<string>? Tags { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

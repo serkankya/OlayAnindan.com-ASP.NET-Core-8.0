@@ -6,6 +6,9 @@
         public int UserId { get; set; }
         public int ArticleId { get; set; }
         public string? Username { get; set; }
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
+        public string? ImageUrl { get; set; }
         public string? Title { get; set; }
         public string? CommentText { get; set; }
         public DateTime CreatedDate { get; set; }

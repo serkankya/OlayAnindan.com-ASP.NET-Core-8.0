@@ -91,7 +91,7 @@ namespace OA.DataAccessLayer.Concrete
         {
             using (var connection = _dapperContext.GetConnection())
             {
-                string queryForArticle = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.ArticleId = @articleId AND (a.Status = 1 AND m.Status = 1)";
+                string queryForArticle = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.ArticleId = @articleId AND (a.Status = 1 AND m.Status = 1)";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("@articleId", articleId);
@@ -115,7 +115,7 @@ namespace OA.DataAccessLayer.Concrete
         {
             using (var connection = _dapperContext.GetConnection())
             {
-                string queryForArticles = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.Status = 1 AND m.Status = 1 ORDER BY a.CreatedAt DESC";
+                string queryForArticles = "SELECT a.*, m.*, u.Username, u.FullName, u.ImageUrl, u.Email, u.RoleId FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.Status = 1 AND m.Status = 1 ORDER BY a.CreatedAt DESC";
 
                 var values = await connection.QueryAsync<ResultArticleRequest>(queryForArticles);
                 return values.ToList();

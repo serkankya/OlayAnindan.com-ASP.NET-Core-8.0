@@ -25,6 +25,13 @@ namespace OA.WebAPI.Controllers
 			return Ok(values);
 		}
 
+		[HttpGet("GetResultCommentsById/{articleId}")]
+		public async Task<IActionResult> GetResultComments(int articleId)
+		{
+			var values = await _commentDal.GetResultCommentsById(articleId);
+			return Ok(values);
+		}
+
 		[HttpPut("ActivateComment/{id}")]
 		public async Task<IActionResult> ActivateComment(int id)
 		{
