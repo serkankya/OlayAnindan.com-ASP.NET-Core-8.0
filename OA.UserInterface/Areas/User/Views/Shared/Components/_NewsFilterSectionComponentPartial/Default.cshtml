@@ -1,22 +1,27 @@
-﻿<div class="row mb-4">
-    <div class="col-12">
-        <form action="/User/News/FilterNews" method="get">
-            <div class="form-group">
-                <label for="categoryId">Kategori Seç</label>
-                <select class="form-control" id="categoryId" name="categoryId">
-                    <option value="">Tüm Kategoriler</option>
-                    <option value="1" @(ViewBag.SelectedCategoryId == 1 ? "selected" : "")>Kategori1</option>
-                    <option value="2" @(ViewBag.SelectedCategoryId == 2 ? "selected" : "")>Kategori2</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="dateOpt">Tarihe Göre Sırala</label>
-                <select class="form-control" id="dateOpt" name="dateOpt">
-                    <option value="true" @(ViewBag.SelectedDateOpt == true ? "selected" : "")>En Yeni</option>
-                    <option value="false" @(ViewBag.SelectedDateOpt == false ? "selected" : "")>En Eski</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary py-3 px-5">Filtrele</button>
-        </form>
-    </div>
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model List<ResultCategoryRequest>
+
+<div class="row mb-4">
+	<div class="col-12">
+		<form action="/User/News/FilterNews" method="get">
+			<div class="form-group">
+				<label for="categoryId">Kategori Seç</label>
+				<select class="form-control" id="categoryId" name="categoryId">
+					<option value="">Tüm Kategoriler</option>
+					@foreach (var item in Model)
+					{
+						<option value="@item.CategoryId" @(ViewBag.SelectedCategoryId == item.CategoryId ? "selected" : "")>@item.CategoryName</option>
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="dateOpt">Tarihe Göre Sırala</label>
+				<select class="form-control" id="dateOpt" name="dateOpt">
+					<option value="true" @(ViewBag.SelectedDateOpt == true ? "selected" : "")>En Yeni</option>
+					<option value="false" @(ViewBag.SelectedDateOpt == false ? "selected" : "")>En Eski</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary py-3 px-5">Filtrele</button>
+		</form>
+	</div>
 </div>
