@@ -1,8 +1,37 @@
-﻿
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model List<ResultCategoryRequest>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="col-lg-8">
+	<div class="section-title">
+		<h4 class="m-0 text-uppercase font-weight-bold">Kategori Seçiniz</h4>
+	</div>
+<div class="row">
+
+	@foreach (var item in Model)
+	{
+		<div class="col-lg-6">
+			<div class="position-relative mb-3">
+				<img class="img-fluid w-100" src="@Url.Content(item.CoverImage)" style="object-fit: cover;">
+				<div class="bg-white border border-top-0 p-4">
+						<div class="mb-2">
+							<a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true">Görüntüle</a>
+						</div>
+						<a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold text-multiline-truncate" href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true">
+						@item.CategoryName
+					</a>
+					<p class="m-0 text-line-truncate">
+						@item.Description
+					</p>
+				</div>
+
+			</div>
+		</div>
+	}
+</div>
+</div>
 

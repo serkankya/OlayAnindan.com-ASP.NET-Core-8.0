@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OA.EntityLayer.Requests.ArticleRequests
+﻿namespace OA.EntityLayer.Requests.ArticleRequests
 {
-    public class ResultArticleRequest
+	public class ResultArticleRequest
     {
         public int ArticleId { get; set; }
         public int UserId { get; set; }

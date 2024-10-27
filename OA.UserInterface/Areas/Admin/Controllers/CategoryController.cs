@@ -92,6 +92,7 @@ namespace OA.UserInterface.Areas.Admin.Controllers
 				updateCategoryRequest.CategoryId,
 				updateCategoryRequest.CategoryName,
 				updateCategoryRequest.Description,
+				updateCategoryRequest.CoverImage,
 				DateTime.Now,
 				updateCategoryRequest.Status
 			);

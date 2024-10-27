@@ -21,6 +21,17 @@ namespace OA.UserInterface.Areas.User.Controllers
 
 		public IActionResult Index()
 		{
+			if (Convert.ToInt32(TempData["CategoryId"]) > 0 && TempData["DateOpt"] != null)
+			{
+				ViewBag.SelectedCategoryId = TempData["CategoryId"];
+				ViewBag.SelectedDateOpt = TempData["DateOpt"];
+			}
+			else
+			{
+				ViewBag.SelectedCategoryId = 0;
+				ViewBag.SelectedDateOpt = true;
+			}
+
 			ViewBag.CategoryId = TempData["CategoryId"];
 			ViewBag.DateOpt = TempData["DateOpt"];
 
