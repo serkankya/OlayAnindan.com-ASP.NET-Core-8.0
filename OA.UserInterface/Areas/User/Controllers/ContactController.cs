@@ -20,21 +20,8 @@ namespace OA.UserInterface.Areas.User.Controllers
             _apiSettings = apiSettings.Value;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
-            var response = await client.GetAsync("ContactInfo/GetActives");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonData = await response.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultContactInfoRequest>>(jsonData);
-                var value = values!.FirstOrDefault();
-
-                return View(value);
-            }
-
             return View();
         }
 

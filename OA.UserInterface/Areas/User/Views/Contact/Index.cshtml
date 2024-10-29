@@ -1,68 +1,19 @@
-﻿@using OA.EntityLayer.Requests.ContactInfoRequests
-@model ResultContactInfoRequest
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div class="col-lg-8">
+
     <div class="section-title mb-0">
         <h4 class="m-0 text-uppercase font-weight-bold">Bizimle İletişime Geçin</h4>
     </div>
+
     <div class="bg-white border border-top-0 p-4 mb-3">
-        <div class="mb-4">
-            <h6 class="text-uppercase font-weight-bold">Hakkımızda</h6>
-            <p class="mb-4">@Model.Info<a href="/User/Home/Index">OlayAnindan.com</a>.</p>
-            <div class="mb-3">
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-map-marker-alt text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Ofisimiz</h6>
-                </div>
-                <p class="m-0">@Model.Address</p>
-            </div>
-            <div class="mb-3">
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-envelope-open text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Email Adresimiz</h6>
-                </div>
-                <p class="m-0">@Model.Email</p>
-            </div>
-            <div class="mb-3">
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fa fa-phone-alt text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Telefon Numaramız</h6>
-                </div>
-                <p class="m-0">@Model.PhoneNumber</p>
-            </div>
-        </div>
-        <h6 class="text-uppercase font-weight-bold mb-3">Mesaj Gönderin</h6>
-        <form action="/User/Contact/SendMessage" method="post">
-            <div class="form-row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control p-4" name="FullName" placeholder="Adınız ve Soyadınız" required="required" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="email" class="form-control p-4" name="Email" placeholder="E-mailiniz" required="required" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control p-4" name="Subject" placeholder="Konu" required="required" />
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" rows="4" name="Message" placeholder="Mesajınız" required="required"></textarea>
-            </div>
-            <div>
-                <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;"
-                        type="submit">
-                    Mesajı Gönder
-                </button>
-            </div>
-        </form>
+        @await Component.InvokeAsync("_ContactInfoComponentPartial")
+        
+        @await Component.InvokeAsync("_ContactSendMessageComponentPartial")
     </div>
+
 </div>
 

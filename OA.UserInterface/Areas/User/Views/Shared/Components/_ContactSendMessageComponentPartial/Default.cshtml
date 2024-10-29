@@ -1,0 +1,27 @@
+﻿<h6 class="text-uppercase font-weight-bold mb-3">Mesaj Gönderin</h6>
+<form action="/User/Contact/SendMessage" method="post">
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control p-4" name="FullName" placeholder="Adınız ve Soyadınız" required="required" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="email" class="form-control p-4" name="Email" placeholder="E-mailiniz" required="required" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control p-4" name="Subject" placeholder="Konu" required="required" />
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" rows="4" name="Message" placeholder="Mesajınız" required="required"></textarea>
+    </div>
+    <div>
+        <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;"
+                type="submit">
+            Mesajı Gönder
+        </button>
+    </div>
+</form>
