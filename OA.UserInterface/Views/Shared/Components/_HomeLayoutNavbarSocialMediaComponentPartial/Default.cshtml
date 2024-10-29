@@ -1,0 +1,17 @@
+﻿@using OA.EntityLayer.Requests.SocialMediaRequests
+@model List<ResultSocialMediaRequest>
+
+<div class="col-lg-3 text-right d-none d-md-block">
+	<nav class="navbar navbar-expand-sm bg-dark p-0">
+		<ul class="navbar-nav ml-auto mr-n2">
+
+			@foreach (var item in Model)
+			{
+				<li class="nav-item">
+					<a class="nav-link text-body" href="@item.SiteUrl"><small class="@item.Icon"></small></a>
+				</li>
+			}
+
+		</ul>
+	</nav>
+</div>

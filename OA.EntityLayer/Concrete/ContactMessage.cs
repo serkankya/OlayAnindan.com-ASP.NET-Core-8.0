@@ -23,7 +23,7 @@ namespace OA.EntityLayer.Concrete
         public string? Message { get; set; }
 
         [Column("SentDate")]
-        public DateTime SentDate { get; set; } = DateTime.UtcNow;
+        public DateTime SentDate { get; set; }
 
         [Column("IsRead")]
         public bool IsRead { get; set; }

@@ -23,7 +23,7 @@ namespace OA.EntityLayer.Concrete
         public string? PhoneNumber { get; set; }
 
         [Column("CreatedAt")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
 
         [Column("Status")]
         public bool Status { get; set; }
