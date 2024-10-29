@@ -9,5 +9,6 @@
         public string? Message { get; set; }
         public DateTime SentDate { get; set; }
         public bool IsRead { get; set; }
+        public bool Status { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using OA.EntityLayer.Requests.ArticleTagRequests;
 using OA.EntityLayer.Requests.AuditLogRequests;
 using OA.EntityLayer.Requests.CategoryRequests;
 using OA.EntityLayer.Requests.CommentRequests;
+using OA.EntityLayer.Requests.ContactMessageRequests;
 using OA.EntityLayer.Requests.MediaRequests;
 using OA.EntityLayer.Requests.NotificationRequests;
 using OA.EntityLayer.Requests.RoleRequests;
@@ -39,8 +40,10 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IGenericRepository<Media, InsertMediaRequest, UpdateMediaRequest>, GenericRepository<Media, InsertMediaRequest, UpdateMediaRequest>>();
 			services.AddTransient<IGenericRepository<Notification, InsertNotificationRequest, UpdateNotificationRequest>, GenericRepository<Notification, InsertNotificationRequest, UpdateNotificationRequest>>();
 			services.AddTransient<IGenericRepository<Tag, InsertTagRequest, UpdateTagRequest>, GenericRepository<Tag, InsertTagRequest, UpdateTagRequest>>();
+			services.AddTransient<IGenericRepository<ContactMessage, InsertContactMessageRequest, UpdateContactMessageRequest>, GenericRepository<ContactMessage, InsertContactMessageRequest, UpdateContactMessageRequest>>();
 
-			services.AddTransient<ILoginDal, LoginDal>();
+
+            services.AddTransient<ILoginDal, LoginDal>();
 			services.AddTransient<IUserDal, UserDal>();
 			services.AddTransient<IArticleDal, ArticleDal>();
 			services.AddTransient<IArticleTagDal, ArticleTagDal>();

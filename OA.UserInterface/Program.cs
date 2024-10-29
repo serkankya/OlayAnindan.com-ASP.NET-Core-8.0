@@ -43,6 +43,8 @@ namespace OA.UserInterface
             pattern: "User/{controller=Home}/{action=Index}",
             defaults: new { area = "User" });
 
+			app.MapFallbackToAreaController("Index", "Home","User");
+
             app.Run();
 		}
 	}
