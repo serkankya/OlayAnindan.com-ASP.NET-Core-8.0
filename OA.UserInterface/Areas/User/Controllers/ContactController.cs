@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using OA.EntityLayer.Requests.ContactInfoRequests;
 using OA.EntityLayer.Requests.ContactMessageRequests;
 using OA.UserInterface.Models;
 using System.Text;
@@ -19,8 +20,21 @@ namespace OA.UserInterface.Areas.User.Controllers
             _apiSettings = apiSettings.Value;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+            var response = await client.GetAsync("ContactInfo/GetActives");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultContactInfoRequest>>(jsonData);
+                var value = values!.FirstOrDefault();
+
+                return View(value);
+            }
+
             return View();
         }
 

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using OA.EntityLayer.Requests.ContactInfoRequests
+@model ResultContactInfoRequest
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
@@ -9,28 +12,28 @@
     </div>
     <div class="bg-white border border-top-0 p-4 mb-3">
         <div class="mb-4">
-            <h6 class="text-uppercase font-weight-bold">Contact Info</h6>
-            <p class="mb-4">INFO HERE<a href="www.olayanindan.com">link</a>.</p>
+            <h6 class="text-uppercase font-weight-bold">Hakkımızda</h6>
+            <p class="mb-4">@Model.Info<a href="/User/Home/Index">OlayAnindan.com</a>.</p>
             <div class="mb-3">
                 <div class="d-flex align-items-center mb-2">
                     <i class="fa fa-map-marker-alt text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Our Office</h6>
+                    <h6 class="font-weight-bold mb-0">Ofisimiz</h6>
                 </div>
-                <p class="m-0">123 Street, New York, USA</p>
+                <p class="m-0">@Model.Address</p>
             </div>
             <div class="mb-3">
                 <div class="d-flex align-items-center mb-2">
                     <i class="fa fa-envelope-open text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Email Us</h6>
+                    <h6 class="font-weight-bold mb-0">Email Adresimiz</h6>
                 </div>
-                <p class="m-0">info@example.com</p>
+                <p class="m-0">@Model.Email</p>
             </div>
             <div class="mb-3">
                 <div class="d-flex align-items-center mb-2">
                     <i class="fa fa-phone-alt text-primary mr-2"></i>
-                    <h6 class="font-weight-bold mb-0">Call Us</h6>
+                    <h6 class="font-weight-bold mb-0">Telefon Numaramız</h6>
                 </div>
-                <p class="m-0">+012 345 6789</p>
+                <p class="m-0">@Model.PhoneNumber</p>
             </div>
         </div>
         <h6 class="text-uppercase font-weight-bold mb-3">Mesaj Gönderin</h6>
