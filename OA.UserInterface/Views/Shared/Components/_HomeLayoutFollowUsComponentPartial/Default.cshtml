@@ -1,0 +1,19 @@
+﻿@using OA.EntityLayer.Requests.SocialMediaRequests
+@model List<ResultSocialMediaRequest>
+
+<div class="mb-3">
+	<div class="section-title mb-0">
+		<h4 class="m-0 text-uppercase font-weight-bold">Bizi Takip Edin</h4>
+	</div>
+	<div class="bg-white border border-top-0 p-3">
+
+		@foreach (var item in Model)
+		{
+			<a href="@item.SiteUrl" class="d-block w-100 text-white text-decoration-none mb-3" style="background: @item.LeftBackgroundColor;">
+				<i class="@item.BiggerIcon" style="width: 65px; background: @item.RightBackgroundColor;"></i>
+				<span class="font-weight-medium">+@item.Follower Takipçi</span>
+			</a>
+		}
+		
+	</div>
+</div>
