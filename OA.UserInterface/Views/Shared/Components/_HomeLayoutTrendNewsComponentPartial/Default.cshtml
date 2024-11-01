@@ -13,10 +13,10 @@
 				<img class="img-fluid" src="@Url.Content(item.MainMediaPath)" alt="" style="width: 100px; height: 100px; object-fit: cover;">
 				<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
 					<div class="mb-2">
-						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">@item.CategoryName</a>
+						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true">@item.CategoryName</a>
 						<a class="text-body" href=""><small>@item.CreatedAt</small></a>
 					</div>
-					<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">@item.MainTitle</a>
+					<a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="/User/News/SingleNews/@item.ArticleId">@item.MainTitle</a>
 				</div>
 			</div>
 		}	

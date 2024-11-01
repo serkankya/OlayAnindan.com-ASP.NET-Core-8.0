@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using OA.EntityLayer.Requests.ArticleRequests;
 using OA.EntityLayer.Requests.CommentRequests;
 using OA.UserInterface.Models;
 using System.Text;
@@ -70,5 +71,35 @@ namespace OA.UserInterface.Areas.User.Controllers
 
 			return View();
 		}
-	}
+
+        public async Task<IActionResult> SearchArticles(string keyWord)
+        {
+            if (keyWord != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+
+                var encodedKeyWord = Uri.EscapeDataString(keyWord); //safer.
+                var response = await client.GetAsync($"Article/SearchArticles?keyWord={encodedKeyWord}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<ResultArticleRequest>>(jsonData);
+
+                    return View("SearchArticles",values);
+                }	
+                else
+                {
+                    ModelState.AddModelError("SearchArticles", "Arama işlemi başarısız oldu.");
+                    return View();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("SearchArticles", "Lütfen bir anahtar kelime girin.");
+                return View();
+            }
+        }
+    }
 }

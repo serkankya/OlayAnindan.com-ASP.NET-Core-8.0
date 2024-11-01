@@ -1,8 +1,12 @@
-﻿<h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Bizi Takip Edin</h6>
+﻿@using OA.EntityLayer.Requests.SocialMediaRequests
+@model List<ResultSocialMediaRequest>
+
+<h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Bizi Takip Edin</h6>
 <div class="d-flex justify-content-start">
-	<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-	<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-	<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-	<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
-	<a class="btn btn-lg btn-secondary btn-lg-square" href="#"><i class="fab fa-youtube"></i></a>
+
+	@foreach (var item in Model)
+	{
+		<a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="@item.SiteUrl"><i class="@item.Icon"></i></a>
+	}
+	
 </div>

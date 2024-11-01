@@ -1,4 +1,7 @@
-﻿<h5 class="mb-4 text-white text-uppercase font-weight-bold">Bize Ulaşın</h5>
-<p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
-<p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-<p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+﻿@using OA.EntityLayer.Requests.ContactInfoRequests
+@model ResultContactInfoRequest
+
+<h5 class="mb-4 text-white text-uppercase font-weight-bold">Bize Ulaşın</h5>
+<p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>@Model.Address</p>
+<p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>@Model.PhoneNumber</p>
+<p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>@Model.Email</p>

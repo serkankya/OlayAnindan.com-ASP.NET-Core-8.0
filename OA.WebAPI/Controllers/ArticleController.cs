@@ -74,5 +74,11 @@ namespace OA.WebAPI.Controllers
             return Ok(values);
         }
 
+        [HttpGet("SearchArticles")]
+        public async Task<IActionResult> SearchArticles(string keyWord)
+        {
+            var values = await _articleDal.SearchArticles(keyWord);
+            return Ok(values);
+        }
     }
 }

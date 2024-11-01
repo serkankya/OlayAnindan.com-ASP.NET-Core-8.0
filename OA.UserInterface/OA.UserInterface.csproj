@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\admin\js\main.js" />
     <None Include="wwwroot\admin\lib\chart\chart.min.js" />
     <None Include="wwwroot\admin\lib\easing\easing.js" />
@@ -218,6 +214,10 @@
     <None Include="wwwroot\news\scss\bootstrap\scss\_utilities.scss" />
     <None Include="wwwroot\news\scss\bootstrap\scss\_variables.scss" />
     <None Include="wwwroot\news\scss\style.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

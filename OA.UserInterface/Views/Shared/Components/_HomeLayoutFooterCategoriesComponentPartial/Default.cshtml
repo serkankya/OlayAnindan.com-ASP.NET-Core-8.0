@@ -1,21 +1,12 @@
-﻿<div class="col-lg-3 col-md-6 mb-5">
-	<h5 class="mb-4 text-white text-uppercase font-weight-bold">Categories</h5>
+﻿@using OA.EntityLayer.Requests.CategoryRequests
+@model List<ResultCategoryRequest>
+
+<div class="col-lg-3 col-md-6 mb-5">
+	<h5 class="mb-4 text-white text-uppercase font-weight-bold">Kategoriler</h5>
 	<div class="m-n1">
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Siyaset</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">İşletme</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Girişim</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Magazin</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
-		<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
+		@foreach (var item in Model)
+		{
+			<a href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true" class="btn btn-sm btn-outline-secondary m-1">@item.CategoryName</a>
+		}
 	</div>
 </div>

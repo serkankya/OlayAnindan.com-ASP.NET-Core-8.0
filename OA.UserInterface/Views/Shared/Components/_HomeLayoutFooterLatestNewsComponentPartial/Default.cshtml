@@ -1,24 +1,27 @@
-﻿<div class="col-lg-3 col-md-6 mb-5">
-	<h5 class="mb-4 text-white text-uppercase font-weight-bold">Trendler</h5>
-	<div class="mb-3">
-		<div class="mb-2">
-			<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
-			<a class="text-body" href=""><small>Jan 01, 2045</small></a>
+﻿@using OA.EntityLayer.Requests.ArticleRequests
+@model List<ResultArticleRequest>
+
+@{
+	Int32 count = 0;
+}
+
+<div class="col-lg-3 col-md-6 mb-5">
+	<h5 class="mb-4 text-white text-uppercase font-weight-bold">Son Haberler</h5>
+
+	@foreach (var item in Model)
+	{
+		count++;
+
+		@if (count == 4)
+			break;
+
+		<div class="mb-3">
+			<div class="mb-2">
+				<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true">@item.CategoryName</a>
+				<a class="text-body" href="/User/News/SingleNews/@item.ArticleId"><small>@item.CreatedAt</small></a>
+			</div>
+			<a class="small text-body text-uppercase font-weight-medium" href="/User/News/SingleNews/@item.ArticleId">@item.MainTitle</a>
 		</div>
-		<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
-	</div>
-	<div class="mb-3">
-		<div class="mb-2">
-			<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
-			<a class="text-body" href=""><small>Jan 01, 2045</small></a>
-		</div>
-		<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
-	</div>
-	<div class="">
-		<div class="mb-2">
-			<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="#">Başlık</a>
-			<a class="text-body" href=""><small>Jan 01, 2045</small></a>
-		</div>
-		<a class="small text-body text-uppercase font-weight-medium" href="">Lorem ipsum dolor sit amet elit. Proin vitae porta diam...</a>
-	</div>
+	}
+
 </div>
