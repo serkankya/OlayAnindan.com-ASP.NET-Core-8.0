@@ -8,7 +8,7 @@ using OA.EntityLayer.Requests.SocialMediaRequests;
 
 namespace OA.DataAccessLayer.Concrete
 {
-	internal class SocialMediaDal : GenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>, ISocialMediaDal
+	public class SocialMediaDal : GenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>, ISocialMediaDal
 	{
 		public SocialMediaDal(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>> logger)
 			: base(sqlToolsProvider, dapperContext, logger)

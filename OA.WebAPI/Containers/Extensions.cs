@@ -18,6 +18,7 @@ using OA.EntityLayer.Requests.MediaRequests;
 using OA.EntityLayer.Requests.NotificationRequests;
 using OA.EntityLayer.Requests.RoleRequests;
 using OA.EntityLayer.Requests.SocialMediaRequests;
+using OA.EntityLayer.Requests.SubscriberRequests;
 using OA.EntityLayer.Requests.TagRequests;
 using OA.EntityLayer.Requests.UserRequests;
 using OA.WebAPI.FluentValidation;
@@ -45,6 +46,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IGenericRepository<ContactMessage, InsertContactMessageRequest, UpdateContactMessageRequest>, GenericRepository<ContactMessage, InsertContactMessageRequest, UpdateContactMessageRequest>>();
 			services.AddTransient<IGenericRepository<ContactInfo, InsertContactInfoRequest, UpdateContactInfoRequest>, GenericRepository<ContactInfo, InsertContactInfoRequest, UpdateContactInfoRequest>>();
 			services.AddTransient<IGenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>, GenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>>();
+			services.AddTransient<IGenericRepository<Subscriber, InsertSubscriberRequest, UpdateSubscriberRequest>, GenericRepository<Subscriber, InsertSubscriberRequest, UpdateSubscriberRequest>>();
 
             services.AddTransient<ILoginDal, LoginDal>();
 			services.AddTransient<IUserDal, UserDal>();
