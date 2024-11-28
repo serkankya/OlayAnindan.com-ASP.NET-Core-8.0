@@ -1,0 +1,24 @@
+﻿
+<div class="container mt-5">
+    <h2>Login</h2>
+    @if (TempData["LoginError"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["LoginError"]
+        </div>
+    }
+
+    <form method="post" action="/User/Login/Index">
+        <div class="form-group">
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" id="username" name="username" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Şifre</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    </form>
+</div>

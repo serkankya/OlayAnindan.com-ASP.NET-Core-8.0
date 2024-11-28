@@ -59,13 +59,19 @@ namespace OA.UserInterface.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> LeaveComment(InsertCommentRequest insertCommentRequest)
         {
-            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", ""); 
+            var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
             if (string.IsNullOrEmpty(token) || !IsUserOnline(token))
             {
                 TempData["MustBeLoggedInError"] = "Yorum yapmak için giriş yapmak zorundasınız.";
                 return RedirectToAction("SingleNews", "News", new { area = "User", articleId = insertCommentRequest.ArticleId });
             }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            ViewBag.UserId = userId;
 
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);

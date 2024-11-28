@@ -11,7 +11,7 @@
     </div>
     <div class="bg-white border border-top-0 p-4">
         <form action="/User/News/LeaveComment" method="post">
-            <input type="hidden" name="UserId" value="1"/>
+            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
             <input type="hidden" name="ArticleId" value="@ViewBag.SelectedArticledId" />
             <div class="form-group">
                 <label for="message">Yorumunuz *</label>
