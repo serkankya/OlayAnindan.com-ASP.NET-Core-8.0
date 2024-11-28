@@ -2,6 +2,7 @@
 using OA.BusinessLayer.Abstract;
 using OA.EntityLayer.Requests.LoginRequests;
 using OA.WebAPI.JwtTools;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace OA.WebAPI.Controllers
 {
@@ -42,5 +43,28 @@ namespace OA.WebAPI.Controllers
 			var token = new GenerateJwtToken(_configuration).Generate(1);
 			return Ok(new { Token = token });
 		}
-	}
+
+        [HttpPost("CheckOnline")]
+        public IActionResult CheckOnline([FromHeader] string token)
+        {
+            bool isOnline = IsUserOnline(token);
+            if (isOnline)
+            {
+                return Ok(new { Message = "User is online." });
+            }
+            else
+            {
+                return Unauthorized(new { Message = "User is offline or token is invalid." });
+            }
+        }
+
+        private bool IsUserOnline(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var expiryDate = jwtToken.ValidTo;
+            return expiryDate > DateTime.UtcNow;
+        }
+
+    }
 }

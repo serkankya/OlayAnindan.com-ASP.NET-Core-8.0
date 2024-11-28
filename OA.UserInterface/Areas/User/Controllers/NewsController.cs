@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OA.EntityLayer.Requests.ArticleRequests;
 using OA.EntityLayer.Requests.CommentRequests;
 using OA.UserInterface.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace OA.UserInterface.Areas.User.Controllers
@@ -55,22 +56,39 @@ namespace OA.UserInterface.Areas.User.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> LeaveComment(InsertCommentRequest insertCommentRequest)
-		{
-			var client = _httpClientFactory.CreateClient();
-			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
-			var jsonData = JsonConvert.SerializeObject(insertCommentRequest);
-			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-			var response = await client.PostAsync("Comment/Insert", stringContent);
+        [HttpPost]
+        public async Task<IActionResult> LeaveComment(InsertCommentRequest insertCommentRequest)
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", ""); 
 
-			if (response.IsSuccessStatusCode)
-			{
-				return RedirectToAction("SingleNews", "News", new { area = "User", articleId = insertCommentRequest.ArticleId });
-			}
+            if (string.IsNullOrEmpty(token) || !IsUserOnline(token))
+            {
+                TempData["MustBeLoggedInError"] = "Yorum yapmak için giriş yapmak zorundasınız.";
+                return RedirectToAction("SingleNews", "News", new { area = "User", articleId = insertCommentRequest.ArticleId });
+            }
 
-			return View();
-		}
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+            var jsonData = JsonConvert.SerializeObject(insertCommentRequest);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("Comment/Insert", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("SingleNews", "News", new { area = "User", articleId = insertCommentRequest.ArticleId });
+            }
+
+            return View();
+        }
+
+        private bool IsUserOnline(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var expiryDate = jwtToken.ValidTo;
+            return expiryDate > DateTime.UtcNow;
+        }
+
 
         public async Task<IActionResult> SearchArticles(string keyWord)
         {

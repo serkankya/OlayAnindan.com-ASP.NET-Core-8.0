@@ -1,4 +1,11 @@
-﻿<div class="mb-3">
+﻿@if (TempData["MustBeLoggedInError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["MustBeLoggedInError"]
+    </div>
+}
+
+<div class="mb-3">
     <div class="section-title mb-0">
         <h4 class="m-0 text-uppercase font-weight-bold">Yorum Yap</h4>
     </div>
@@ -10,6 +17,7 @@
                 <label for="message">Yorumunuz *</label>
                 <textarea id="message" name="CommentText" cols="30" rows="5" class="form-control"></textarea>
             </div>
+
             <div class="form-group mb-0">
                 <input type="submit" value="Yorumu Paylaş"
                        class="btn btn-primary font-weight-semi-bold py-2 px-3">
