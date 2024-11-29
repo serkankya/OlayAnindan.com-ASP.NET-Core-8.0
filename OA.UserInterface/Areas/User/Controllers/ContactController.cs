@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using OA.EntityLayer.Requests.ContactInfoRequests;
 using OA.EntityLayer.Requests.ContactMessageRequests;
 using OA.UserInterface.Models;
 using System.Text;

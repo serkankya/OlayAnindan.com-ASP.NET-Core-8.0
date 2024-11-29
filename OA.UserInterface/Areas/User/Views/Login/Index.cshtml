@@ -1,24 +1,83 @@
-﻿
-<div class="container mt-5">
-    <h2>Login</h2>
-    @if (TempData["LoginError"] != null)
-    {
-        <div class="alert alert-danger">
-            @TempData["LoginError"]
-        </div>
-    }
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
 
-    <form method="post" action="/User/Login/Index">
-        <div class="form-group">
-            <label for="username">Kullanıcı Adı</label>
-            <input type="text" id="username" name="username" class="form-control" required />
-        </div>
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
 
-        <div class="form-group">
-            <label for="password">Şifre</label>
-            <input type="password" id="password" name="password" class="form-control" required />
-        </div>
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #6a11cb;
+            text-align: center;
+        }
 
-        <button type="submit" class="btn btn-primary">Giriş Yap</button>
-    </form>
-</div>
+        .form-control {
+            border-radius: 5px;
+            height: 45px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: #6a11cb;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            height: 45px;
+        }
+
+        .btn-primary:hover {
+            background: #2575fc;
+        }
+
+        .alert-danger {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Giriş Yap</h2>
+        @if (TempData["LoginError"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["LoginError"]
+            </div>
+        }
+
+        <form method="post" action="/User/Login/Index">
+            <div class="form-group mb-3">
+                <label for="username" class="form-label">Kullanıcı Adı</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Kullanıcı adınızı girin" required />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="password" class="form-label">Şifre</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Şifrenizi girin" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+        </form>
+    </div>
+</body>
+</html>

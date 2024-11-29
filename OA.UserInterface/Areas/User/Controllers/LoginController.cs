@@ -32,11 +32,17 @@ namespace OA.UserInterface.Areas.User.Controllers
             var jsonData = JsonConvert.SerializeObject(loginRequest);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("Login/Login", stringContent);
+            
+            ViewBag.Username = username;
 
             if (response.IsSuccessStatusCode)
             {
-                var token = await response.Content.ReadAsStringAsync();
-                TempData["ActiveToken1"] = token;
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var parsedResponse = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
+                var token = parsedResponse.token.ToString();
+
+                Response.Cookies.Append("AuthToken", token.ToString(), new CookieOptions { HttpOnly = true });
+
                 return RedirectToAction("Index", "Home", new { area = "User" });
             }
             else
@@ -45,5 +51,7 @@ namespace OA.UserInterface.Areas.User.Controllers
                 return View();
             }
         }
+
+
     }
 }

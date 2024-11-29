@@ -2,7 +2,7 @@
 @model ResultArticleRequest
 
 <div class="position-relative mb-3">
-	<img class="img-fluid w-100" src="@Url.Content(Model.MainMediaPath)" style="object-fit: cover;">
+	<img class="img-fluid h-100 w-100" src="@Url.Content(Model.MainMediaPath)" style="object-fit: cover;">
 	<div class="bg-white border border-top-0 p-4">
 		<div class="mb-3">
 			<a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
@@ -14,12 +14,12 @@
 			@Model.MainText
 		</p>
 		<h3 class="text-uppercase font-weight-bold mb-3">@Model.FirstTitle</h3>
-		<img class="img-fluid w-50 float-left mr-4 mb-2" src="@Url.Content(Model.FirstMediaPath)">
+		<img class="img-fluid w-50 h-50 float-left mr-4 mb-2" src="@Url.Content(Model.FirstMediaPath)">
 		<p>
 			@Model.FirstText
 		</p>
 		<h5 class="text-uppercase font-weight-bold mb-3">@Model.SecondTitle</h5>
-		<img class="img-fluid w-50 float-right mr-4 mb-2" src="@Url.Content(Model.SecondMediaPath)">
+		<img class="img-fluid w-50 h-50 float-right mr-4 mb-2" src="@Url.Content(Model.SecondMediaPath)">
 		<p>
 			@Model.SecondText
 		</p>
