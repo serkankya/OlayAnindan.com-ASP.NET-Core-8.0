@@ -52,6 +52,11 @@ namespace OA.UserInterface.Areas.User.Controllers
             }
         }
 
+        public IActionResult LogOut()
+        {
+            Response.Cookies.Delete("AuthToken");
 
-    }
+			return RedirectToAction("Index", "Home", new { area = "User" });
+		}
+	}
 }

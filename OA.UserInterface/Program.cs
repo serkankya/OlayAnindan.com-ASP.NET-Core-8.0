@@ -16,7 +16,12 @@ namespace OA.UserInterface
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+			builder.Services.AddControllersWithViews(options =>
+			{
+				options.Filters.Add<AuthTokenFilter>();
+			});
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

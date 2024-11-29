@@ -72,7 +72,7 @@ namespace OA.UserInterface.Areas.User.Controllers
 
             if (token.StartsWith("Bearer ", StringComparison.InvariantCultureIgnoreCase))
             {
-                token = token.Substring("Bearer ".Length);  // Öneki çıkar
+                token = token.Substring("Bearer ".Length);  
             }
 
             JwtSecurityToken jwtToken;

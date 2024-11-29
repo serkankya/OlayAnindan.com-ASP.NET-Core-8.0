@@ -14,7 +14,14 @@
 						<a class="nav-link text-body small" href="/User/Contact/Index">İletişim</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-body small" href="/User/Login/Index">Giriş Yap</a>
+						@if(ViewBag.ActiveUserId == null)
+						{
+							<a class="nav-link text-body small" href="/User/Login/Index">Giriş Yap</a>
+						}
+						else
+						{
+							<a class="nav-link text-body small" href="/User/Login/LogOut">Çıkış Yap<span> - @ViewBag.ActiveUsername</span></a>
+						}
 					</li>
 				</ul>
 			</nav>

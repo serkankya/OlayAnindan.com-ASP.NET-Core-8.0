@@ -1,13 +1,6 @@
 ﻿@using OA.EntityLayer.Requests.ArticleRequests
 @model List<ResultArticleRequest>
 
-@if(TempData["ActiveToken1"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["ActiveToken1"]
-    </div>
-}
-
 @if (TempData["SuccessfulSubscription"] != null)
 {
     <div class="alert alert-success">
