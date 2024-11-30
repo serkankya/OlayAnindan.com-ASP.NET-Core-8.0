@@ -5,10 +5,15 @@
 
 <div class="col-lg-8">
 
-    @if (ViewBag.CategoryId != null && ViewBag.DateOpt != null)
+    @if (ViewBag.CategoryId > 0 && ViewBag.DateOpt != null)
     {
         @await Component.InvokeAsync("_NewsFilterSectionComponentPartial")
         @await Component.InvokeAsync("_NewsListNewsComponentPartial", new { categoryId = ViewBag.CategoryId, dateOption = ViewBag.DateOpt })
+    }
+    else if (ViewBag.TagId != null)
+    {
+        @await Component.InvokeAsync("_NewsFilterSectionComponentPartial")
+        @await Component.InvokeAsync("_NewsListNewsComponentPartial", new { categoryId = 0, tagId = ViewBag.TagId, dateOption = true })
     }
     else
     {

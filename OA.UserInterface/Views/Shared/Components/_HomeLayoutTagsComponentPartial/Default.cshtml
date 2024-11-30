@@ -11,7 +11,7 @@
 			<div class="d-flex flex-wrap m-n1">
 				@foreach (var item in Model)
 				{
-					<a href="#" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
+					<a href="/User/News/FilterNews?tagId=@item.TagId&dateOpt=true" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
 				}
 			</div>
 		</div>
@@ -27,7 +27,7 @@ else
 			<div class="d-flex flex-wrap m-n1">
 				@foreach (var item in Model)
 				{
-					<a href="#" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
+					<a href="/User/News/FilterNews?tagId=@item.TagId&dateOpt=true" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
 				}
 			</div>
 		</div>

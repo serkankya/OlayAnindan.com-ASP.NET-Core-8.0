@@ -10,222 +10,236 @@ using System.Data.SqlClient;
 
 namespace OA.DataAccessLayer.Concrete
 {
-	public class ArticleDal : GenericRepository<Article, InsertArticleRequest, UpdateArticleRequest>, IArticleDal
-	{
-		readonly IDapperContext _dapperContext;
-		readonly ILogger _logger;
+    public class ArticleDal : GenericRepository<Article, InsertArticleRequest, UpdateArticleRequest>, IArticleDal
+    {
+        readonly IDapperContext _dapperContext;
+        readonly ILogger _logger;
 
-		public ArticleDal(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<Article, InsertArticleRequest, UpdateArticleRequest>> logger)
-			: base(sqlToolsProvider, dapperContext, logger)
-		{
-			_dapperContext = dapperContext;
-			_logger = logger;
-		}
+        public ArticleDal(ISqlToolsProvider sqlToolsProvider, IDapperContext dapperContext, ILogger<GenericRepository<Article, InsertArticleRequest, UpdateArticleRequest>> logger)
+            : base(sqlToolsProvider, dapperContext, logger)
+        {
+            _dapperContext = dapperContext;
+            _logger = logger;
+        }
 
-		public async Task<List<ResultArticleRequest>> GetFeaturedNews()
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string queryForFeatureds = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Categories c ON c.CategoryId = a.CategoryId WHERE a.IsFeatured = 1";
+        public async Task<List<ResultArticleRequest>> GetFeaturedNews()
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string queryForFeatureds = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Categories c ON c.CategoryId = a.CategoryId WHERE a.IsFeatured = 1";
 
-				var values = await connection.QueryAsync<ResultArticleRequest>(queryForFeatureds);
-				return values.ToList();
-			}
-		}
+                var values = await connection.QueryAsync<ResultArticleRequest>(queryForFeatureds);
+                return values.ToList();
+            }
+        }
 
-		public async Task<List<ResultArticleRequest>> GetLatestNews()
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string queryForLatestNews = "SELECT TOP(12)* FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Categories c ON c.CategoryId = a.CategoryId ORDER BY a.CreatedAt DESC";
+        public async Task<List<ResultArticleRequest>> GetLatestNews()
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string queryForLatestNews = "SELECT TOP(12)* FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Categories c ON c.CategoryId = a.CategoryId ORDER BY a.CreatedAt DESC";
 
-				var values = await connection.QueryAsync<ResultArticleRequest>(queryForLatestNews);
-				return values.ToList();
-			}
-		}
+                var values = await connection.QueryAsync<ResultArticleRequest>(queryForLatestNews);
+                return values.ToList();
+            }
+        }
 
-		public async Task<List<ResultArticleRequest>> GetMainNewsHighlights()
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string queryForMainNews = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.IsMainNews = 1";
+        public async Task<List<ResultArticleRequest>> GetMainNewsHighlights()
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string queryForMainNews = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.IsMainNews = 1";
 
-				var values = await connection.QueryAsync<ResultArticleRequest>(queryForMainNews);
-				return values.ToList();
-			}
-		}
+                var values = await connection.QueryAsync<ResultArticleRequest>(queryForMainNews);
+                return values.ToList();
+            }
+        }
 
-		public async Task<List<ResultArticleRequest>> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption)
-		{
-			//if dateOption == false this means news will start from oldest
-			//if dateOption == true this means news will start from newest
+        public async Task<List<ResultArticleRequest>> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption)
+        {
+            //if dateOption == false this means news will start from oldest
+            //if dateOption == true this means news will start from newest
 
-			using (var connection = _dapperContext.GetConnection())
-			{
-				//oldest
-				string queryForCategoryAndDateASC = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.CategoryId = @categoryId ORDER BY CreatedAt ASC";
+            using (var connection = _dapperContext.GetConnection())
+            {
+                //oldest
+                string queryForCategoryAndDateASC = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.CategoryId = @categoryId ORDER BY CreatedAt ASC";
 
-				//newest				
-				string queryForCategoryAndDateDESC = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.CategoryId = @categoryId ORDER BY CreatedAt DESC";
+                //newest				
+                string queryForCategoryAndDateDESC = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId WHERE a.CategoryId = @categoryId ORDER BY CreatedAt DESC";
 
-				var parameters = new DynamicParameters();
-				parameters.Add("@categoryId", categoryId);
+                var parameters = new DynamicParameters();
+                parameters.Add("@categoryId", categoryId);
 
-				// Return based on the date option
-				if (dateOption == true)
-				{
-					//newest
-					var values = await connection.QueryAsync<ResultArticleRequest>(queryForCategoryAndDateDESC, parameters);
-					return values.ToList();
-				}
-				else
-				{
-					//oldest
-					var values = await connection.QueryAsync<ResultArticleRequest>(queryForCategoryAndDateASC, parameters);
-					return values.ToList();
-				}
-			}
-		}
+                // Return based on the date option
+                if (dateOption == true)
+                {
+                    //newest
+                    var values = await connection.QueryAsync<ResultArticleRequest>(queryForCategoryAndDateDESC, parameters);
+                    return values.ToList();
+                }
+                else
+                {
+                    //oldest
+                    var values = await connection.QueryAsync<ResultArticleRequest>(queryForCategoryAndDateASC, parameters);
+                    return values.ToList();
+                }
+            }
+        }
 
-		public async Task<ResultArticleRequest> GetResultArticleById(int articleId)
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string queryForArticle = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.ArticleId = @articleId AND (a.Status = 1 AND m.Status = 1)";
+        public async Task<List<ResultArticleRequest>> GetFilteredNewsByTag(int tagId)
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string query = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN ArticleTags art ON art.ArticleId = a.ArticleId INNER JOIN Tags t ON t.TagId = art.TagId WHERE t.TagId = 1";
 
-				var parameters = new DynamicParameters();
-				parameters.Add("@articleId", articleId);
+                var parameters = new DynamicParameters();
+                parameters.Add("@categoryId", tagId);
 
-				var value = await connection.QueryFirstOrDefaultAsync<ResultArticleRequest>(queryForArticle, parameters);
+                var values = await connection.QueryAsync<ResultArticleRequest>(query, parameters);
+                return values.ToList();
+            }
+        }
 
-				if (value == null)
-				{
-					return new ResultArticleRequest
-					{
-						ArticleId = 0,
-						MainTitle = "Article not found or inactive!"
-					};
-				}
+        public async Task<ResultArticleRequest> GetResultArticleById(int articleId)
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string queryForArticle = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.ArticleId = @articleId AND (a.Status = 1 AND m.Status = 1)";
 
-				return value;
-			}
-		}
+                var parameters = new DynamicParameters();
+                parameters.Add("@articleId", articleId);
 
-		public async Task<List<ResultArticleRequest>> GetResultArticles()
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string queryForArticles = "SELECT a.*, m.*, u.Username, u.FullName, u.ImageUrl, u.Email, u.RoleId FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.Status = 1 AND m.Status = 1 ORDER BY a.CreatedAt DESC";
+                var value = await connection.QueryFirstOrDefaultAsync<ResultArticleRequest>(queryForArticle, parameters);
 
-				var values = await connection.QueryAsync<ResultArticleRequest>(queryForArticles);
-				return values.ToList();
-			}
-		}
+                if (value == null)
+                {
+                    return new ResultArticleRequest
+                    {
+                        ArticleId = 0,
+                        MainTitle = "Article not found or inactive!"
+                    };
+                }
 
-		public async Task<bool> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)
-		{
-			try
-			{
-				using (var connection = _dapperContext.GetConnection())
-				{
-					connection.Open();
+                return value;
+            }
+        }
 
-					using (SqlTransaction sqlTransaction = connection.BeginTransaction())
-					{
-						try
-						{
-							#region Articles
-							string queryForArticle = "INSERT INTO Articles (UserId, CategoryId, MainTitle, MainText, FirstTitle, FirstText, SecondTitle, SecondText, Summary, IsFeatured) VALUES (@userId, @categoryId, @mainTitle, @mainText, @firstTitle, @firstText, @secondTitle, @secondText, @summary, @isFeatured); SELECT SCOPE_IDENTITY();";
+        public async Task<List<ResultArticleRequest>> GetResultArticles()
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string queryForArticles = "SELECT a.*, m.*, u.Username, u.FullName, u.ImageUrl, u.Email, u.RoleId FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE a.Status = 1 AND m.Status = 1 ORDER BY a.CreatedAt DESC";
 
-							var parametersForArticle = new DynamicParameters();
-							parametersForArticle.Add("@userId", insertArticleTransactionRequest.UserId);
-							parametersForArticle.Add("@categoryId", insertArticleTransactionRequest.CategoryId);
-							parametersForArticle.Add("@mainTitle", insertArticleTransactionRequest.MainTitle);
-							parametersForArticle.Add("@mainText", insertArticleTransactionRequest.MainText);
-							parametersForArticle.Add("@firstTitle", insertArticleTransactionRequest.FirstTitle);
-							parametersForArticle.Add("@firstText", insertArticleTransactionRequest.FirstText);
-							parametersForArticle.Add("@secondTitle", insertArticleTransactionRequest.SecondTitle);
-							parametersForArticle.Add("@secondText", insertArticleTransactionRequest.SecondText);
-							parametersForArticle.Add("@summary", insertArticleTransactionRequest.Summary);
-							parametersForArticle.Add("@isFeatured", insertArticleTransactionRequest.IsFeatured);
+                var values = await connection.QueryAsync<ResultArticleRequest>(queryForArticles);
+                return values.ToList();
+            }
+        }
 
-							int insertedArticleId = await connection.QuerySingleAsync<int>(queryForArticle, parametersForArticle, sqlTransaction);
-							#endregion
+        public async Task<bool> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)
+        {
+            try
+            {
+                using (var connection = _dapperContext.GetConnection())
+                {
+                    connection.Open();
 
-							#region Tags
-							string queryForTags = "INSERT INTO Tags (TagName) VALUES (@tagName); SELECT SCOPE_IDENTITY();";
+                    using (SqlTransaction sqlTransaction = connection.BeginTransaction())
+                    {
+                        try
+                        {
+                            #region Articles
+                            string queryForArticle = "INSERT INTO Articles (UserId, CategoryId, MainTitle, MainText, FirstTitle, FirstText, SecondTitle, SecondText, Summary, IsFeatured) VALUES (@userId, @categoryId, @mainTitle, @mainText, @firstTitle, @firstText, @secondTitle, @secondText, @summary, @isFeatured); SELECT SCOPE_IDENTITY();";
 
-							List<int> TagIds = new List<int>();
+                            var parametersForArticle = new DynamicParameters();
+                            parametersForArticle.Add("@userId", insertArticleTransactionRequest.UserId);
+                            parametersForArticle.Add("@categoryId", insertArticleTransactionRequest.CategoryId);
+                            parametersForArticle.Add("@mainTitle", insertArticleTransactionRequest.MainTitle);
+                            parametersForArticle.Add("@mainText", insertArticleTransactionRequest.MainText);
+                            parametersForArticle.Add("@firstTitle", insertArticleTransactionRequest.FirstTitle);
+                            parametersForArticle.Add("@firstText", insertArticleTransactionRequest.FirstText);
+                            parametersForArticle.Add("@secondTitle", insertArticleTransactionRequest.SecondTitle);
+                            parametersForArticle.Add("@secondText", insertArticleTransactionRequest.SecondText);
+                            parametersForArticle.Add("@summary", insertArticleTransactionRequest.Summary);
+                            parametersForArticle.Add("@isFeatured", insertArticleTransactionRequest.IsFeatured);
 
-							var parametersForTags = new DynamicParameters();
-							for (int i = 0; i < insertArticleTransactionRequest.TagName.Count; i++)
-							{
-								parametersForTags.Add("@tagName", insertArticleTransactionRequest.TagName[i]);
+                            int insertedArticleId = await connection.QuerySingleAsync<int>(queryForArticle, parametersForArticle, sqlTransaction);
+                            #endregion
 
-								int insertedTagId = await connection.QuerySingleAsync<int>(queryForTags, parametersForTags, sqlTransaction);
-								TagIds.Add(insertedTagId);
-							}
-							#endregion
+                            #region Tags
+                            string queryForTags = "INSERT INTO Tags (TagName) VALUES (@tagName); SELECT SCOPE_IDENTITY();";
 
-							#region ArticleTags
-							string queryForArticleTags = "INSERT INTO ArticleTags (ArticleId, TagId) VALUES (@articleId, @tagId)";
+                            List<int> TagIds = new List<int>();
 
-							var parametersForArticleTags = new DynamicParameters();
+                            var parametersForTags = new DynamicParameters();
+                            for (int i = 0; i < insertArticleTransactionRequest.TagName.Count; i++)
+                            {
+                                parametersForTags.Add("@tagName", insertArticleTransactionRequest.TagName[i]);
 
-							for (int i = 0; i < TagIds.Count; i++)
-							{
-								parametersForArticleTags.Add("@articleId", insertedArticleId);
-								parametersForArticleTags.Add("@tagId", TagIds[i]);
+                                int insertedTagId = await connection.QuerySingleAsync<int>(queryForTags, parametersForTags, sqlTransaction);
+                                TagIds.Add(insertedTagId);
+                            }
+                            #endregion
 
-								await connection.ExecuteAsync(queryForArticleTags, parametersForArticleTags, sqlTransaction);
-							}
-							#endregion
+                            #region ArticleTags
+                            string queryForArticleTags = "INSERT INTO ArticleTags (ArticleId, TagId) VALUES (@articleId, @tagId)";
 
-							#region Medias
-							string queryForMedias = "INSERT INTO Medias (ArticleId, MainMediaPath, MainMediaType, FirstMediaPath, FirstMediaType, SecondMediaPath, SecondMediaType) VALUES (@articleId, @mainMediaPath, @mainMediaType, @firstMediaPath, @firstMediaType, @secondMediaPath, @secondMediaType)";
+                            var parametersForArticleTags = new DynamicParameters();
 
-							var parametersForMedias = new DynamicParameters();
-							parametersForMedias.Add("@articleId", insertedArticleId);
-							parametersForMedias.Add("@mainMediaPath", insertArticleTransactionRequest.MainMediaPath);
-							parametersForMedias.Add("@mainMediaType", insertArticleTransactionRequest.MainMediaType);
-							parametersForMedias.Add("@firstMediaPath", insertArticleTransactionRequest.FirstMediaPath);
-							parametersForMedias.Add("@firstMediaType", insertArticleTransactionRequest.FirstMediaType);
-							parametersForMedias.Add("@secondMediaPath", insertArticleTransactionRequest.SecondMediaPath);
-							parametersForMedias.Add("@secondMediaType", insertArticleTransactionRequest.SecondMediaType);
+                            for (int i = 0; i < TagIds.Count; i++)
+                            {
+                                parametersForArticleTags.Add("@articleId", insertedArticleId);
+                                parametersForArticleTags.Add("@tagId", TagIds[i]);
 
-							int rowsEffected = await connection.ExecuteAsync(queryForMedias, parametersForMedias, sqlTransaction);
-							#endregion
+                                await connection.ExecuteAsync(queryForArticleTags, parametersForArticleTags, sqlTransaction);
+                            }
+                            #endregion
 
-							sqlTransaction.Commit();
-							return rowsEffected > 0;
-						}
-						catch
-						{
-							sqlTransaction.Rollback();
-							throw;
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "An error occurred while inserting article.");
-				return false;
-			}
-		}
+                            #region Medias
+                            string queryForMedias = "INSERT INTO Medias (ArticleId, MainMediaPath, MainMediaType, FirstMediaPath, FirstMediaType, SecondMediaPath, SecondMediaType) VALUES (@articleId, @mainMediaPath, @mainMediaType, @firstMediaPath, @firstMediaType, @secondMediaPath, @secondMediaType)";
 
-		public async Task<List<ResultArticleRequest>> SearchArticles(string keyWord)
-		{
-			using (var connection = _dapperContext.GetConnection())
-			{
-				string searchQuery = "SELECT a.*, m.*, u.Username, u.FullName, u.ImageUrl, u.Email, u.RoleId FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE (a.Status = 1 AND m.Status = 1) AND a.MainTitle LIKE @keyWord OR a.Summary LIKE @keyWord OR a.FirstTitle LIKE @keyWord OR a.MainText LIKE @keyWord ORDER BY a.CreatedAt DESC";
+                            var parametersForMedias = new DynamicParameters();
+                            parametersForMedias.Add("@articleId", insertedArticleId);
+                            parametersForMedias.Add("@mainMediaPath", insertArticleTransactionRequest.MainMediaPath);
+                            parametersForMedias.Add("@mainMediaType", insertArticleTransactionRequest.MainMediaType);
+                            parametersForMedias.Add("@firstMediaPath", insertArticleTransactionRequest.FirstMediaPath);
+                            parametersForMedias.Add("@firstMediaType", insertArticleTransactionRequest.FirstMediaType);
+                            parametersForMedias.Add("@secondMediaPath", insertArticleTransactionRequest.SecondMediaPath);
+                            parametersForMedias.Add("@secondMediaType", insertArticleTransactionRequest.SecondMediaType);
 
-				var parameters = new DynamicParameters();
-				parameters.Add("@keyWord", "%" + keyWord + "%");
+                            int rowsEffected = await connection.ExecuteAsync(queryForMedias, parametersForMedias, sqlTransaction);
+                            #endregion
 
-				var value = await connection.QueryAsync<ResultArticleRequest>(searchQuery, parameters);
-				return value.ToList();
-			}
-		}
-	}
+                            sqlTransaction.Commit();
+                            return rowsEffected > 0;
+                        }
+                        catch
+                        {
+                            sqlTransaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while inserting article.");
+                return false;
+            }
+        }
+
+        public async Task<List<ResultArticleRequest>> SearchArticles(string keyWord)
+        {
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string searchQuery = "SELECT a.*, m.*, u.Username, u.FullName, u.ImageUrl, u.Email, u.RoleId FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN Users u ON u.UserId = a.UserId WHERE (a.Status = 1 AND m.Status = 1) AND a.MainTitle LIKE @keyWord OR a.Summary LIKE @keyWord OR a.FirstTitle LIKE @keyWord OR a.MainText LIKE @keyWord ORDER BY a.CreatedAt DESC";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@keyWord", "%" + keyWord + "%");
+
+                var value = await connection.QueryAsync<ResultArticleRequest>(searchQuery, parameters);
+                return value.ToList();
+            }
+        }
+    }
 }

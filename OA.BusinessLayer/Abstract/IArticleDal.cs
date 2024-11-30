@@ -13,6 +13,7 @@ namespace OA.BusinessLayer.Abstract
 		Task<List<ResultArticleRequest>> GetFeaturedNews();
 		Task<List<ResultArticleRequest>> GetLatestNews();
 		Task<List<ResultArticleRequest>> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption);
-		Task<List<ResultArticleRequest>> SearchArticles(string keyWord);
+		Task<List<ResultArticleRequest>> GetFilteredNewsByTag(int tagId);
+        Task<List<ResultArticleRequest>> SearchArticles(string keyWord);
 	}
 }

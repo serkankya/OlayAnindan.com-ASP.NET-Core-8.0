@@ -74,6 +74,13 @@ namespace OA.WebAPI.Controllers
             return Ok(values);
         }
 
+        [HttpGet("GetFilteredNewsByTag")]
+        public async Task<IActionResult> GetFilteredNewsByTag(int tagId)
+        {
+            var values = await _articleDal.GetFilteredNewsByTag(tagId);
+            return Ok(values);
+        }
+
         [HttpGet("SearchArticles")]
         public async Task<IActionResult> SearchArticles(string keyWord)
         {

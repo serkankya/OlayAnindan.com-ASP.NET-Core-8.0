@@ -29,6 +29,12 @@ namespace OA.UserInterface.Areas.User.Controllers
                 ViewBag.SelectedCategoryId = TempData["CategoryId"];
                 ViewBag.SelectedDateOpt = TempData["DateOpt"];
             }
+            else if (Convert.ToInt32(TempData["TagId"]) > 0)
+            {
+                ViewBag.SelectedTagId = TempData["TagId"];
+                ViewBag.SelectedCategoryId = 0;
+                ViewBag.SelectedDateOpt = true;
+            }
             else
             {
                 ViewBag.SelectedCategoryId = 0;
@@ -37,15 +43,17 @@ namespace OA.UserInterface.Areas.User.Controllers
 
             ViewBag.CategoryId = TempData["CategoryId"];
             ViewBag.DateOpt = TempData["DateOpt"];
+            ViewBag.TagId = TempData["TagId"];
 
             return View();
         }
 
         [HttpGet]
-        public IActionResult FilterNews(int categoryId, bool dateOpt)
+        public IActionResult FilterNews(int categoryId, int tagId, bool dateOpt)
         {
             TempData["CategoryId"] = categoryId;
             TempData["DateOpt"] = dateOpt;
+            TempData["TagId"] = tagId;
 
             return RedirectToAction("Index", "News", new { area = "User" });
         }
