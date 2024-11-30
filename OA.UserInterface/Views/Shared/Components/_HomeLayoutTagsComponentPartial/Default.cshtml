@@ -1,19 +1,36 @@
-﻿<div class="mb-3">
-	<div class="section-title mb-0">
-		<h4 class="m-0 text-uppercase font-weight-bold">Etiketler</h4>
-	</div>
-	<div class="bg-white border border-top-0 p-3">
-		<div class="d-flex flex-wrap m-n1">
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Siyaset</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">İşletme</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Girişim</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Magazin</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Sağlık</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Eğitim</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Bilim</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Ekonomi</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yemekler</a>
-			<a href="#" class="btn btn-sm btn-outline-secondary m-1">Yolculuk</a>
+﻿@using OA.EntityLayer.Requests.ArticleTagRequests
+@model List<ResultArticleTagRequest>
+
+@if (TempData["SelectedArticleId"] != null)
+{
+	<div class="mb-3">
+		<div class="section-title mb-0">
+			<h4 class="m-0 text-uppercase font-weight-bold">Haberin Etiketleri</h4>
+		</div>
+		<div class="bg-white border border-top-0 p-3">
+			<div class="d-flex flex-wrap m-n1">
+				@foreach (var item in Model)
+				{
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
+				}
+			</div>
 		</div>
 	</div>
-</div>
+}
+else
+{
+	<div class="mb-3">
+		<div class="section-title mb-0">
+			<h4 class="m-0 text-uppercase font-weight-bold">Etiketler</h4>
+		</div>
+		<div class="bg-white border border-top-0 p-3">
+			<div class="d-flex flex-wrap m-n1">
+				@foreach (var item in Model)
+				{
+					<a href="#" class="btn btn-sm btn-outline-secondary m-1">@item.TagName</a>
+				}
+			</div>
+		</div>
+	</div>
+}
+

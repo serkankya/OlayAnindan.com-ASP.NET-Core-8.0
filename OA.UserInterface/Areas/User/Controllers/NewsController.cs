@@ -54,6 +54,7 @@ namespace OA.UserInterface.Areas.User.Controllers
         public IActionResult SingleNews(int articleId)
         {
             ViewBag.SelectedArticledId = articleId;
+            TempData["SelectedArticleId"] = articleId;
             return View();
         }
 
