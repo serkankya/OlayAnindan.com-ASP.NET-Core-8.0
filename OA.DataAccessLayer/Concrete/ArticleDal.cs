@@ -91,10 +91,10 @@ namespace OA.DataAccessLayer.Concrete
         {
             using (var connection = _dapperContext.GetConnection())
             {
-                string query = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN ArticleTags art ON art.ArticleId = a.ArticleId INNER JOIN Tags t ON t.TagId = art.TagId WHERE t.TagId = 1";
+                string query = "SELECT * FROM Articles a INNER JOIN Medias m ON a.ArticleId = m.ArticleId INNER JOIN ArticleTags art ON art.ArticleId = a.ArticleId INNER JOIN Tags t ON t.TagId = art.TagId WHERE t.TagId = @tagId";
 
                 var parameters = new DynamicParameters();
-                parameters.Add("@categoryId", tagId);
+                parameters.Add("@tagId", tagId);
 
                 var values = await connection.QueryAsync<ResultArticleRequest>(query, parameters);
                 return values.ToList();

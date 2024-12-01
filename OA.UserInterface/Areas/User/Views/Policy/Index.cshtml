@@ -1,0 +1,22 @@
+﻿@{
+	ViewData["Title"] = "Yasal Bilgiler";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="col-lg-8">
+	<div class="section-title mb-0">
+		<h4 class="m-0 text-uppercase font-weight-bold">Yasal Bilgilerimiz</h4>
+	</div>
+
+	<div class="bg-white border border-top-0 p-4 mb-3">
+
+		@await Component.InvokeAsync("_PolicyPrivacyPolicyComponentPartial")
+
+		@await Component.InvokeAsync("_PolicyCookiePolicyComponentPartial")
+
+		@await Component.InvokeAsync("_PolicyTermsOfUseComponentPartial")
+
+		@await Component.InvokeAsync("_PolicyClarificationTextKvkkComponentPartial")
+
+	</div>
+</div>
