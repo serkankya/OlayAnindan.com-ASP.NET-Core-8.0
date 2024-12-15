@@ -6,6 +6,7 @@ using OA.DataAccessLayer.Concrete;
 using OA.DataAccessLayer.Concrete.Dapper;
 using OA.DataAccessLayer.Concrete.GenericRepository;
 using OA.EntityLayer.Concrete;
+using OA.EntityLayer.Requests.AdRequests;
 using OA.EntityLayer.Requests.ArticleRatingRequests;
 using OA.EntityLayer.Requests.ArticleRequests;
 using OA.EntityLayer.Requests.ArticleTagRequests;
@@ -47,6 +48,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IGenericRepository<ContactInfo, InsertContactInfoRequest, UpdateContactInfoRequest>, GenericRepository<ContactInfo, InsertContactInfoRequest, UpdateContactInfoRequest>>();
 			services.AddTransient<IGenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>, GenericRepository<SocialMedia, InsertSocialMediaRequest, UpdateSocialMediaRequest>>();
 			services.AddTransient<IGenericRepository<Subscriber, InsertSubscriberRequest, UpdateSubscriberRequest>, GenericRepository<Subscriber, InsertSubscriberRequest, UpdateSubscriberRequest>>();
+			services.AddTransient<IGenericRepository<Ad, InsertAdRequest, UpdateAdRequest>, GenericRepository<Ad, InsertAdRequest, UpdateAdRequest>>();
 
             services.AddTransient<ILoginDal, LoginDal>();
 			services.AddTransient<IUserDal, UserDal>();
@@ -54,6 +56,7 @@ namespace OA.WebAPI.Containers
 			services.AddTransient<IArticleTagDal, ArticleTagDal>();
 			services.AddTransient<ICommentDal, CommentDal>();
 			services.AddTransient<ICategoryDal, CategoryDal>();
+			services.AddTransient<IAdDal, AdDal>();
 
 			//Fluent validation validators
 			services.AddValidatorsFromAssemblyContaining<UserValidator>();
