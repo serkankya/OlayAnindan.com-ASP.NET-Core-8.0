@@ -39,7 +39,7 @@ namespace OA.UserInterface.Areas.User.Controllers
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 var parsedResponse = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
-                var token = parsedResponse.token.ToString();
+                var token = parsedResponse!.token.ToString();
 
                 Response.Cookies.Append("AuthToken", token.ToString(), new CookieOptions { HttpOnly = true });
 
