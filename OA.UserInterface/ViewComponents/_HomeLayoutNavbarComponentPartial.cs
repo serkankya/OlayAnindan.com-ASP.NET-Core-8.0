@@ -20,6 +20,12 @@ namespace OA.UserInterface.ViewComponents
 		public async Task<IViewComponentResult> InvokeAsync(int userId)
 		{
 			var activeUserId = HttpContext.Items["ActiveUserId"] as string;
+
+			if(activeUserId == null)
+			{
+				return View();
+			}
+
 			userId = Convert.ToInt32(activeUserId);
 
 			var client = _httpClientFactory.CreateClient();

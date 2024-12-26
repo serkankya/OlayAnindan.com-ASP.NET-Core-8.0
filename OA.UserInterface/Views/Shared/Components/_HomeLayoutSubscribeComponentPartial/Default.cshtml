@@ -7,15 +7,98 @@
 	<div class="bg-white text-center border border-top-0 p-3">
 		<p>Haberlerimizden anında haberdar olmak için mail adresinizle abone olmayı unutmayın.</p>
 
-		<form asp-action="SubscribeToNews" asp-controller="Home" asp-area="User" method="post">
-		<div class="input-group mb-2" style="width: 100%;">
-				<input type="text" class="form-control form-control-lg" name="Email" placeholder="E-mail Adresiniz">
+		<form id="subscribeForm">
+			<div class="input-group mb-2" style="width: 100%;">
+				<input type="email" class="form-control form-control-lg" id="emailInput" name="Email" placeholder="E-mail Adresiniz" required>
 				<div class="input-group-append">
-					<button class="btn btn-primary font-weight-bold px-3">Kayıt Ol</button>
+					<button type="button" class="btn btn-primary font-weight-bold px-3" onclick="sendCode()">Kayıt Ol</button>
 				</div>
-		</div>
+			</div>
 		</form>
 
 		<small>Dilediğiniz zaman iptal etme garantisi.</small>
 	</div>
 </div>
+
+<div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verificationModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="verificationModalLabel">Doğrulama Kodu</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Mail adresinize gelen doğrulama kodunu giriniz.</p>
+				<form id="verificationForm">
+					<div class="mb-3">
+						<input type="text" class="form-control" id="verificationCode" name="VerificationCode" placeholder="Doğrulama Kodu" required>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="verifyCode()">Doğrula</button>
+				</form>
+				<div id="verificationMessage"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function verifyCode() {
+		var verificationCode = document.getElementById('verificationCode').value;
+		if (!verificationCode) {
+			alert("Lütfen doğrulama kodunu giriniz.");
+			return;
+		}
+
+		var formData = new FormData();
+		formData.append("verificationCode", verificationCode);
+
+		fetch('@Url.Action("VerifyCode", "Home", new { area = "User" })', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.success) {
+					document.getElementById('verificationMessage').innerHTML = '<div class="alert alert-success">Abonelik başarılı!</div>';
+				} else {
+					document.getElementById('verificationMessage').innerHTML = '<div class="alert alert-danger">Geçersiz doğrulama kodu.</div>';
+				}
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				alert("Bir hata oluştu.");
+			});
+	}
+</script>
+
+<script>
+	function sendCode() {
+		var email = document.getElementById('emailInput').value;
+
+		if (!email) {
+			alert("Lütfen bir e-mail adresi giriniz.");
+			return;
+		}
+
+		var modal = new bootstrap.Modal(document.getElementById('verificationModal'));
+		modal.show();
+
+		var formData = new FormData();
+		formData.append("Email", email);
+
+		fetch('@Url.Action("SendCode", "Home", new { area = "User" })', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => {
+				if (!response.ok) {
+					alert("Mail gönderilirken bir hata oluştu.");
+					return;
+				}
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				alert("Bir hata oluştu.");
+			});
+	}
+</script>

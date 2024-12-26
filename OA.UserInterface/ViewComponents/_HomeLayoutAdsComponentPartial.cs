@@ -26,12 +26,12 @@ namespace OA.UserInterface.ViewComponents
 			if(response.IsSuccessStatusCode)
 			{
 				var jsonData = await response.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<ResultAdRequest>(jsonData);
+				var values = JsonConvert.DeserializeObject<List<ResultAdRequest>>(jsonData);
 
 				return View(values);
 			}
 
-			return View();
+			return View(new List<ResultAdRequest>());
 		}
 	}
 }
