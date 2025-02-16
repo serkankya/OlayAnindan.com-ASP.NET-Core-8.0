@@ -31,8 +31,23 @@ namespace OA.WebAPI.Controllers
         public async Task<IActionResult> GetResultArticleById(int id)
         {
             var value = await _articleDal.GetResultArticleById(id);
+            await UpdateViewCountById(id);
             return Ok(value);
         }
+
+        //.will be updated
+        [HttpPost("UpdateViewCount/{id}")]
+        public async Task<IActionResult> UpdateViewCountById(int id)
+        {
+            bool isUpdated = await _articleDal.UpdateViewCountById(id);
+
+			if (isUpdated == false)
+			{
+				return BadRequest("Update failed.");
+			}
+
+			return Ok("View count updated successfully.");
+		}
 
         [HttpPost("InsertTransaction")]
         public async Task<IActionResult> InsertTransaction(InsertArticleTransactionRequest insertArticleTransactionRequest)

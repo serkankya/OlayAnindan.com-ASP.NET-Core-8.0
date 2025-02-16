@@ -241,5 +241,25 @@ namespace OA.DataAccessLayer.Concrete
                 return value.ToList();
             }
         }
-    }
+
+		public async Task<bool> UpdateViewCountById(int id)
+		{
+            using (var connection = _dapperContext.GetConnection())
+            {
+                string updateViewCountQuery = "UPDATE Articles SET ViewCount += 1 WHERE ArticleId = @articleId";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@articleId", id);
+
+				int affectedRows = await connection.ExecuteAsync(updateViewCountQuery, parameters);
+
+				if (affectedRows > 0)
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
+	}
 }

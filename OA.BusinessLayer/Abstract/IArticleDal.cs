@@ -15,5 +15,6 @@ namespace OA.BusinessLayer.Abstract
 		Task<List<ResultArticleRequest>> GetFilteredNewsByCategoryAndDate(int categoryId, bool dateOption);
 		Task<List<ResultArticleRequest>> GetFilteredNewsByTag(int tagId);
         Task<List<ResultArticleRequest>> SearchArticles(string keyWord);
+		Task<bool> UpdateViewCountById(int articleId);
 	}
 }
