@@ -109,7 +109,8 @@ namespace OA.UserInterface.Areas.User.Controllers
             (
                 insertCommentRequest.ArticleId,
                 Convert.ToInt32(userId),
-                insertCommentRequest.CommentText
+                insertCommentRequest.CommentText,
+                insertCommentRequest.CreatedDate
             );
 
             var client = _httpClientFactory.CreateClient();

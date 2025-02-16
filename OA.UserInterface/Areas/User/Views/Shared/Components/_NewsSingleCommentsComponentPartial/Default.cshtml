@@ -10,8 +10,8 @@
         @foreach (var item in Model)
         {
             <div class="media mb-4">
-            <img src="@Url.Content(item.ImageUrl)" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-            <div class="media-body">
+                <img src="@Url.Content(item.ImageUrl)" alt="Image" class="img-fluid mr-3 mt-1 rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
+                <div class="media-body">
                 <h6><a class="text-secondary font-weight-bold" href="#">@item.Username</a> <small><i>@item.CreatedDate</i></small></h6>
                 <p>
                     @item.CommentText

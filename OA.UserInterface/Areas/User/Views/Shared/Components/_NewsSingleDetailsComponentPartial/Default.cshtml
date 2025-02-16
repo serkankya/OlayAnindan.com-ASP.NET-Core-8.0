@@ -2,7 +2,7 @@
 @model ResultArticleRequest
 
 <div class="position-relative mb-3">
-	<img class="img-fluid h-100 w-100" src="@Url.Content(Model.MainMediaPath)" style="object-fit: cover;">
+	<img class="img-fluid" src="@Url.Content(Model.MainMediaPath)" style="width: 100%; height: auto; object-fit: cover;">
 	<div class="bg-white border border-top-0 p-4">
 		<div class="mb-3">
 			<a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
@@ -14,19 +14,19 @@
 			@Model.MainText
 		</p>
 		<h3 class="text-uppercase font-weight-bold mb-3">@Model.FirstTitle</h3>
-		<img class="img-fluid w-50 h-50 float-left mr-4 mb-2" src="@Url.Content(Model.FirstMediaPath)">
+		<img class="img-fluid float-left mr-4 mb-2" src="@Url.Content(Model.FirstMediaPath)" style="width:50%;height: 50%;">
 		<p>
 			@Model.FirstText
 		</p>
 		<h5 class="text-uppercase font-weight-bold mb-3">@Model.SecondTitle</h5>
-		<img class="img-fluid w-50 h-50 float-right mr-4 mb-2" src="@Url.Content(Model.SecondMediaPath)">
+		<img class="img-fluid float-left mr-4 mb-2" src="@Url.Content(Model.SecondMediaPath)" style="width:50%;height: 50%;">
 		<p>
 			@Model.SecondText
 		</p>
 	</div>
 	<div class="d-flex justify-content-between bg-white border border-top-0 p-4">
 		<div class="d-flex align-items-center">
-			<img class="rounded-circle mr-2" src="@Url.Content(Model.ImageUrl)" width="25" height="25" alt="">
+			<img src="@Url.Content(Model.ImageUrl)" alt="Image" class="img-fluid mr-3 mt-1 rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
 			<span>@Model.FullName</span>
 		</div>
 		<div class="d-flex align-items-center">

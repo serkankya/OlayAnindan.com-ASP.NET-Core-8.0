@@ -9,8 +9,8 @@
 
 		@foreach (var item in Model)
 		{
-			<div class="d-flex align-items-center bg-white mb-3">
-				<img class="img-fluid" src="@Url.Content(item.MainMediaPath)" alt="" style="width: 100px; height: 100px; object-fit: cover;">
+			<div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+				<img class="img-fluid" src="@Url.Content(item.MainMediaPath)" alt="">
 				<div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
 					<div class="mb-2">
 						<a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="/User/News/FilterNews?categoryId=@item.CategoryId&dateOpt=true">@item.CategoryName</a>

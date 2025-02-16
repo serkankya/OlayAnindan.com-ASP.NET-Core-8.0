@@ -3,21 +3,21 @@
 
 @if (TempData["SuccessfulSubscription"] != null)
 {
-    <div class="alert alert-success">
-        @TempData["SuccessfulSubscription"]
-    </div>
+	<div class="alert alert-success">
+		@TempData["SuccessfulSubscription"]
+	</div>
 }
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 <div class="container-fluid">
-    <div class="row">
-        @await Component.InvokeAsync("_HomeGetMainNewsComponentPartial")
-        @await Component.InvokeAsync("_HomeGetFeaturedNewsComponentPartial")
-    </div>
+	<div class="row">
+		@await Component.InvokeAsync("_HomeGetMainNewsComponentPartial")
+		@await Component.InvokeAsync("_HomeGetFeaturedNewsComponentPartial")
+	</div>
 </div>
 
 @await Component.InvokeAsync("_HomeGetMainNewsSliderComponentPartial")
