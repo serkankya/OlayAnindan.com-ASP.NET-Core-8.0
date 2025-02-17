@@ -1,0 +1,41 @@
+﻿@{
+	Layout = null;
+}
+
+@if (TempData["PasswordDoesNotMatch"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["PasswordDoesNotMatch"]
+	</div>
+}
+
+@if (TempData["ResponseErrors"] != null)
+{
+	var errors = TempData["ResponseErrors"] as List<string>;
+	foreach (var item in errors!)
+	{
+		<div class="alert alert-danger">@item</div>
+	}
+}
+
+<form method="post" action="/User/Register/Index">
+	<label>Kullanıcı Adı</label>
+	<input type="text" name="Username" />
+	<br />
+	<label>Şifre</label>
+	<input type="text" name="PasswordHash" />
+	<br />
+	<label>Şifre Tekrar</label>
+	<input type="text" name="PasswordConfirmation" />
+	<br />
+	<label>Ad Soyad</label>
+	<input type="text" name="FullName" />
+	<br />
+	<label>Email</label>
+	<input type="email" name="Email" />
+	<br />
+
+	<button type="submit">Kayıt Ol</button>
+</form>
+
+<a href="/User/Login/Index">Zaten hesabın var mı? Giriş Yap</a>
