@@ -99,5 +99,10 @@ namespace OA.UserInterface.Areas.User.Controllers
 				return Json(new { success = false });
 			}
 		}
+
+		public ActionResult Error()
+		{
+			return View();
+		}
 	}
 }

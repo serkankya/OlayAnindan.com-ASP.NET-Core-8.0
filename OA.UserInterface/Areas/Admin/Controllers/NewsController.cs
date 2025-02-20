@@ -9,6 +9,7 @@ using System.Text;
 namespace OA.UserInterface.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[RoleBasedAuthorize(1)]
 	public class NewsController : Controller
 	{
 		readonly IHttpClientFactory _httpClientFactory;

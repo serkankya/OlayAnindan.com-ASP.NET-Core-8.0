@@ -21,6 +21,11 @@ namespace OA.UserInterface
 				options.Filters.Add<AuthTokenFilter>();
 			});
 
+			builder.Services.AddControllersWithViews(options =>
+			{
+				options.Filters.Add<AuthTokenFilter>();
+			});
+
 			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
