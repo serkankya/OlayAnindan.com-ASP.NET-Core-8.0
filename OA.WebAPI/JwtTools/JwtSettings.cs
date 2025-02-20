@@ -11,7 +11,6 @@ namespace OA.WebAPI.JwtTools
             var jwtSettings = configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings["SecretKey"];
 
-            // SecretKey için null kontrolü ekleyin
             if (string.IsNullOrEmpty(secretKey))
             {
                 throw new InvalidOperationException("JwtSettings: SecretKey is missing or empty.");
@@ -32,21 +31,18 @@ namespace OA.WebAPI.JwtTools
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings["Issuer"],
                     ValidAudience = jwtSettings["Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))  // secretKey doğru şekilde kullanılıyor
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))  
                 };
 
-                // Hata mesajlarını düzgün bir şekilde almak için event handler eklenebilir
                 opt.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>
                     {
-                        // Authentication failed durumunda hata loglaması yapabilirsiniz
                         Console.WriteLine("Authentication failed: " + context.Exception.Message);
                         return Task.CompletedTask;
                     },
                     OnChallenge = context =>
                     {
-                        // Challenge durumunda hata loglaması yapabilirsiniz
                         Console.WriteLine("Authentication challenge: " + context.ErrorDescription);
                         return Task.CompletedTask;
                     }

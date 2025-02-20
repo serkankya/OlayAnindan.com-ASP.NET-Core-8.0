@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OA.UserInterface.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace OA.UserInterface.Areas.User.Controllers
@@ -23,36 +24,53 @@ namespace OA.UserInterface.Areas.User.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(string username, string password)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
-            var loginRequest = new { username = username, passwordHash = password };
-            var jsonData = JsonConvert.SerializeObject(loginRequest);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("Login/Login", stringContent);
-            
-            ViewBag.Username = username;
+		[HttpPost]
+		public async Task<IActionResult> Index(string username, string password)
+		{
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_apiSettings.BaseHostUrl!);
+			var loginRequest = new { username = username, passwordHash = password };
+			var jsonData = JsonConvert.SerializeObject(loginRequest);
+			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+			var response = await client.PostAsync("Login/Login", stringContent);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var parsedResponse = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
-                var token = parsedResponse!.token.ToString();
+			ViewBag.Username = username;
 
-                Response.Cookies.Append("AuthToken", token.ToString(), new CookieOptions { HttpOnly = true });
+			if (response.IsSuccessStatusCode)
+			{
+				var jsonResponse = await response.Content.ReadAsStringAsync();
+				var parsedResponse = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
+				var token = parsedResponse!.token.ToString();
 
-                return RedirectToAction("Index", "Home", new { area = "User" });
-            }
-            else
-            {
-                TempData["LoginError"] = "Geçersiz kullanıcı adı veya şifre.";
-                return View();
-            }
-        }
+				Response.Cookies.Append("AuthToken", token, new CookieOptions { HttpOnly = true });
 
-        public IActionResult LogOut()
+				var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+				var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+
+				if (jwtToken != null)
+				{
+					var roleIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "roleId")?.Value;
+
+					if (!string.IsNullOrEmpty(roleIdClaim) && int.TryParse(roleIdClaim, out int roleId))
+					{
+						if (roleId == 1) 
+						{
+							return RedirectToAction("ShareNews", "News", new { area = "Admin" });
+						}
+					}
+				}
+
+				return RedirectToAction("Index", "Home", new { area = "User" });
+			}
+			else
+			{
+				TempData["LoginError"] = "Geçersiz kullanıcı adı veya şifre.";
+				return View();
+			}
+		}
+
+
+		public IActionResult LogOut()
         {
             Response.Cookies.Delete("AuthToken");
 

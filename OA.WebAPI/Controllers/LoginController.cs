@@ -12,37 +12,40 @@ namespace OA.WebAPI.Controllers
 	{
 		readonly ILoginDal _loginDal;
 		readonly IConfiguration _configuration;
+		readonly IUserDal _userDal;
 
-		public LoginController(ILoginDal loginDal, IConfiguration configuration_)
+		public LoginController(ILoginDal loginDal, IConfiguration configuration_, IUserDal userDal)
 		{
 			_loginDal = loginDal;
 			_configuration = configuration_;
+			_userDal = userDal;
 		}
 
-		[HttpPost("Login")]
-		public async Task<IActionResult> Login(LoginRequest loginUserRequest)
-		{
-			int userId = await _loginDal.Login(loginUserRequest);
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginRequest loginUserRequest)
+        {
+            int userId = await _loginDal.Login(loginUserRequest);
 
-			if (userId > 0)
-			{
-				GenerateJwtToken generateJwtToken = new(_configuration);
-				var token = generateJwtToken.Generate(userId);
+            if (userId > 0)
+            {
+                var userDetails = await _userDal.GetUserById(userId);
+                int roleId = userDetails.RoleId;  // Kullanıcının rolünü alıyoruz
 
-				return Ok(new { Message = "Successful login process.", Token = token });
-			}
-			else
-			{
-				return NotFound("Invalid username or password.");
-			}
-		}
+                var jwtService = new GenerateJwtToken(_configuration);
+                string token = jwtService.Generate(userId, roleId); // Token üretirken roleId ekledik
 
-		[HttpGet("TestToken")]
-		public IActionResult TestToken()
-		{
-			var token = new GenerateJwtToken(_configuration).Generate(1);
-			return Ok(new { Token = token });
-		}
+                return Ok(new { Token = token });
+            }
+
+            return Unauthorized();
+        }
+
+  //      [HttpGet("TestToken")]
+		//public IActionResult TestToken()
+		//{
+		//	var token = new GenerateJwtToken(_configuration).Generate(1);
+		//	return Ok(new { Token = token });
+		//}
 
         [HttpPost("CheckOnline")]
         public IActionResult CheckOnline([FromHeader] string token)

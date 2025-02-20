@@ -9,7 +9,7 @@
         public string? FullName { get; set; }
         public string? Email { get; set; }
         public string? ImageUrl { get; set; }
-        public string? Title { get; set; }
+        public string? MainTitle { get; set; }
         public string? CommentText { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Status { get; set; }

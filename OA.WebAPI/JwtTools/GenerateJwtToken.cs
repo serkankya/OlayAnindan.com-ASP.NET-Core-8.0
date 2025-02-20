@@ -14,11 +14,10 @@ namespace OA.WebAPI.JwtTools
             _configuration = configuration;
         }
 
-        public string Generate(int userId)
+        public string Generate(int userId, int roleId)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
 
-            // SecretKey için null kontrolü ekleyin
             var secretKey = jwtSettings["SecretKey"];
             if (string.IsNullOrEmpty(secretKey))
             {
@@ -27,23 +26,25 @@ namespace OA.WebAPI.JwtTools
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            // Expiry süresi için DateTime'u doğru şekilde ayarlayın
             var expiryInMinutes = Convert.ToInt32(jwtSettings["ExpiryInMinutes"]);
             var expires = DateTime.UtcNow.AddMinutes(expiryInMinutes);
+
+            var claims = new List<Claim>
+            {
+                new Claim("userId", userId.ToString()),
+                new Claim("roleId", roleId.ToString())
+            };
 
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
                 audience: jwtSettings["Audience"],
-                claims: new List<Claim>
-                {
-                    new Claim("userId", userId.ToString())  // Kullanıcı ID'sini claim olarak ekledik
-                },
-                expires: expires,  // Expiry doğru şekilde ayarlandı
+                claims: claims,
+                expires: expires,
                 signingCredentials: creds
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

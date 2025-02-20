@@ -7,13 +7,14 @@ using System.IdentityModel.Tokens.Jwt;
 
 public class AuthTokenFilter : ActionFilterAttribute
 {
-	public async override void OnActionExecuting(ActionExecutingContext context)
+	public override void OnActionExecuting(ActionExecutingContext context)
 	{
 		var token = context.HttpContext.Request.Cookies["AuthToken"];
 
 		if (string.IsNullOrEmpty(token))
 		{
 			context.HttpContext.Items["ActiveUserId"] = null;
+			context.HttpContext.Items["ActiveRoleId"] = null; 
 		}
 		else
 		{
@@ -31,19 +32,25 @@ public class AuthTokenFilter : ActionFilterAttribute
 				if (jwtToken != null)
 				{
 					var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
+					var roleId = jwtToken.Claims.FirstOrDefault(c => c.Type == "roleId")?.Value; 
+
 					context.HttpContext.Items["ActiveUserId"] = userId;
+					context.HttpContext.Items["ActiveRoleId"] = roleId; 
 				}
 				else
 				{
-					context.HttpContext.Items["ActiveUserId"] = null; 
+					context.HttpContext.Items["ActiveUserId"] = null;
+					context.HttpContext.Items["ActiveRoleId"] = null;
 				}
 			}
 			catch
 			{
-				context.HttpContext.Items["ActiveUserId"] = null; 
+				context.HttpContext.Items["ActiveUserId"] = null;
+				context.HttpContext.Items["ActiveRoleId"] = null;
 			}
 		}
 
 		base.OnActionExecuting(context);
 	}
 }
+
